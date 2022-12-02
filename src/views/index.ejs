@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>This is HomePage</h1>
+    <a href="/sign_in">Đăng nhập</a>
+    <br />
+    <a href="#">Đăng ký</a>
+    <table border="1" width="100%">
+      <tr>
+        <th>Tên món ăn</th>
+        <th>Miêu tả</th>
+        <th>Tình trạng</th>
+        <th>Giá</th>
+      </tr>
+      <% for(var i=0;i<3;i++) {%>
+      <tr>
+        <td><%= dataFoods[i].MAN_TEN %></td>
+        <td><%= dataFoods[i].MAN_MIEUTA %></td>
+        <td><%= dataFoods[i].MAN_TINHTRANG %></td>
+        <td><%= dataFoods[i].MAN_GIA %></td>
+      </tr>
+      <%}%>
+    </table>
+  </body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+
+    <script
+      src="https://kit.fontawesome.com/9382b228af.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <section class="container forms">
+      <div class="top">
+        <img src="/images/sigup pic/logo.png" alt="" id="logo" />
+      </div>
+
+      <div class="mid">
+        <div class="form">
+          <img
+            src="/images/sigin pic/sigin_thumpnail.png"
+            alt=""
+            id="thumpnail"
+          />
+          <div class="form-content">
+            <form action="/process_sign_in" method="POST">
+              <div class="field input-field">
+                <i class="fa-solid fa-user input-logo"></i>
+                <input
+                  size="50"
+                  type="text"
+                  placeholder="Type your user name"
+                  class="input text"
+                  name="username"
+                />
+              </div>
+
+              <div class="field input-field">
+                <i class="fa-solid fa-lock input-logo"></i>
+                <input
+                  size="50"
+                  type="password"
+                  placeholder="Type your password"
+                  class="password text"
+                  name="password"
+                />
+                <i class="fa-regular fa-eye eye-icon"></i>
+              </div>
+
+              <div class="stayin">
+                <input type="checkbox" name="remember" />
+                <span class="text">
+                  Stay signed in
+                  <span class="forgot-pass text"
+                    ><a href="#">Forgot password?</a></span
+                  >
+                </span>
+              </div>
+
+              <div class="field button-field">
+                <button>
+                  <span style="color: white">Sign in</span>
+                </button>
+              </div>
+            </form>
+
+            <div class="form-link">
+              <span class="text">
+                Don't have an account?
+                <a href="#" class="link signup-link">Register</a>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="right">
+          <img src="/images/sigin pic/siginpic.png" alt="" id="signinpic" />
+        </div>
+      </div>
+
+      <div class="bot">
+        <span>
+          <u> Copyright © 2022 ACCB Food Inc.</u>
+        </span>
+      </div>
+    </section>
+
+    <!-- JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="/script.js"></script>
+  </body>
+</html>
