@@ -11,10 +11,7 @@ const config = {
        trustedConnection: true,
     }
 }
-
 // connect to database
 const pool = new sql.ConnectionPool(config);
 
-module.exports =  {
-    pool
-}
+export default pool;

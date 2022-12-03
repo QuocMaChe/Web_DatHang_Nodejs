@@ -1,4 +1,4 @@
-import {pool} from "../configs/connectDB";
+import pool from "../configs/connectDB";
 import multer from 'multer';
 
 let getHomepage =async (req,res)=>{
@@ -319,6 +319,9 @@ let processUpload_file=async (req,res)=>{
             return res.send('Please select an image to upload');
         }
         else if (err instanceof multer.MulterError) {
+            return res.send(err);
+        }
+        else if(err){
             return res.send(err);
         }
         // Display uploaded image for user validation
