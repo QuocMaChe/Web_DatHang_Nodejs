@@ -3,18 +3,18 @@ import homeController from '../Controllers/homeController';
 import multer from "multer";
 import path from "path";
 var appRoot=require('app-root-path');
-
+//
 let router=express.Router();
-
+//
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
-        //cb(null, appRoot+'/src/publics/images');
-        cb(null, '../publics/images');
+        cb(null, appRoot+ '/src/publics/images/profile pic/');
     },
 
     // By default, multer removes file extensions so let's add them back
     filename: function(req, file, cb) {
-        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+        const uniqueSuffix = Date.now() + path.extname(file.originalname);
+        cb(null, file.fieldname + '-' + uniqueSuffix);
     }
 });
 const imageFilter = function(req, file, cb) {
@@ -25,8 +25,8 @@ const imageFilter = function(req, file, cb) {
     }
     cb(null, true);
 };
-
-let upload = multer({ storage: storage, fileFilter: imageFilter });
+//
+const upload = multer({ storage: storage, fileFilter: imageFilter });
 
 const initWebRoute=(app)=>{
     /* original
@@ -49,4 +49,5 @@ const initWebRoute=(app)=>{
     router.post('/accb_food.vn/process_upload_file',upload.single('profile_pic'),homeController.processUpload_file);
     return app.use('/',router);
 }
+//
 export default initWebRoute;
