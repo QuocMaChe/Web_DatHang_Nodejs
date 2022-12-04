@@ -38,6 +38,10 @@ let getHomepage =async (req,res)=>{
     }
 }
 //
+let getTest = (req,res)=>{
+    return res.render('homepage.ejs');
+}
+//
 let getSign_in = (req,res)=>{
     return res.render('sign_in.ejs')
 }
@@ -336,5 +340,6 @@ module.exports={
     processSign_in,
     processSign_out,
     getProfilepage,
-    processUpload_file
+    processUpload_file,
+    getTest
 }
