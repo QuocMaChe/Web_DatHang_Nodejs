@@ -262,25 +262,25 @@ let processSign_in = async (req,res)=>{
                 return res.redirect('/accb_food.vn/admin');
             }//
             else if(s1 == 'KHACHHANG'.trim()){
-                let result = await pool.request().query(`select * from KHACHHANG where MA='${data_user[0].MA}'`);
+                let result = await pool.request().query(`select * from KHACHHANG where KH_MA ='${data_user[0].MA}'`);
                 let user=result.recordset;
                 req.session.user=user;
                 return res.redirect('/accb_food.vn');
             }//
             else if(s1 == 'DOITAC'.trim()){
-                let result = await pool.request().query(`select * from DOITAC where MA='${data_user[0].MA}'`);
+                let result = await pool.request().query(`select * from DOITAC where DT_MA ='${data_user[0].MA}'`);
                 let partner=result.recordset;
                 req.session.partner=partner;
                 return res.redirect('/accb_food.vn/doitac');
             }//
             else if(s1 == 'TAIXE'.trim()){
-                let result = await pool.request().query(`select * from TAIXE where MA='${data_user[0].MA}'`);
+                let result = await pool.request().query(`select * from TAIXE where TX_MA ='${data_user[0].MA}'`);
                 let driver=result.recordset;
                 req.session.driver=driver;
                 return res.redirect('/accb_food.vn/taixe');
             }//
             else{
-                let result = await pool.request().query(`select * from NHANVIEN where MA='${data_user[0].MA}'`);
+                let result = await pool.request().query(`select * from NHANVIEN where NV_MA ='${data_user[0].MA}'`);
                 let agent=result.recordset;
                 req.session.agent=agent;
                 return res.redirect('/accb_food.vn/nhanvien');

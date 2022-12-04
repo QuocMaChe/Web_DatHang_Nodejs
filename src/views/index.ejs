@@ -11,6 +11,8 @@
     <a href="/sign_in">Đăng nhập</a>
     <br />
     <a href="#">Đăng ký</a>
+    <br />
+    <% if(dataFoods.lenght){ %>
     <a href="/food/<%= dataFoods[0].MAN_MA %>">Press to test</a>
     <br />
 
@@ -30,5 +32,8 @@
       </tr>
       <%}%>
     </table>
+    <% } else{ %>
+    <h1>Không có món ăn nào</h1>
+    <% } %>
   </body>
 </html>
