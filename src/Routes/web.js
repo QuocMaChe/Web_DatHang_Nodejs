@@ -36,6 +36,7 @@ const initWebRoute=(app)=>{
     */
     router.get('/', homeController.getHomepage);
     router.get('/sign_in', homeController.getSign_in);
+    router.get('/sign_up', homeController.getSign_up);
     router.get('/process_sign_out', homeController.processSign_out);
     router.post('/process_sign_in', homeController.processSign_in);
     router.get('/accb_food.vn', homeController.getHomepageUser);

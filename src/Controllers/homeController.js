@@ -46,6 +46,10 @@ let getSign_in = (req,res)=>{
     return res.render('sign_in.ejs')
 }
 //
+let getSign_up = (req,res)=>{
+    return res.render('sign_up.ejs')
+}
+//
 let getHomepageUser = async (req,res)=>{
     if(req.session.user){
         let data_foods=[];
@@ -341,5 +345,6 @@ module.exports={
     processSign_out,
     getProfilepage,
     processUpload_file,
-    getTest
+    getTest,
+    getSign_up
 }

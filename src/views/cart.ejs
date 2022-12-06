@@ -1,12 +1,307 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    This is cart page
-  </body>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/resert.css">
+    <link rel="stylesheet" href="/Customer/Carrt/cart.css">
+    <link rel="stylesheet" href="/fontawesome-free-6.2.1-web/css/all.css">
+    <title>Cart</title>
+</head>
+
+<body>
+    <section>
+        <nav class="Navbar">
+            <img id="logo" src="/images/LOGO.png" alt="this is logo">
+            <ul class="Navbar-Directory">
+                <li class="Navbar-Directory-item">Home</li>
+                <li class="Navbar-Directory-item">Dishes</li>
+                <li class="Navbar-Directory-item">Menu</li>
+                <li class="Navbar-Directory-item">Review</li>
+                <li class="Navbar-Directory-item">Order</li>
+                <li class="Navbar-Directory-item">About us</li>
+            </ul>
+
+            <div class="Navbar-Search">
+                <input class="Navbar-Search-input" type="search" placeholder="Search">
+                <button class="Navbar-Search-btn">
+                    <span>
+                        <i class="fa-solid fa-search"></i>
+                    </span>
+                </button>
+            </div>
+
+            <div class="Nav-Subnav">
+                <div class="Nav-Subnav-love">
+                    <i class="fa-regular fa-heart"></i>
+                </div>
+                <div class="Nav-Subnav-cart">
+                    <i class="fa-sharp fa-solid fa-cart-plus"></i>
+                </div>
+                <div class="Nav-Subnav-account">
+                    <i class="fa-regular fa-user"></i>
+                </div>
+            </div>
+        </nav>
+    </section>
+
+    <div class="go_back">
+        <button type="submit">
+            <i class="fa-solid fa-arrow-left"></i>
+            Cart
+        </button>
+    </div>
+
+
+    <section>
+        <div class="shopping_cart">
+            <div class="top_cart">
+                <div class="top_title">
+                    <span>
+                        Your shopping cart
+                    </span>
+                    <span>Dishes of your choice</span>
+                </div>
+                <div class="list_dishes">
+                    <div class="tag_dishes">
+                        <div class="top_tag_dishes">
+                            <div class="detail_icon">
+                                <i class="fa-regular fa-eye"></i>
+                            </div>
+                            <img src="/images/dish-1.png" alt="">
+                        </div>
+                        <div class="bottom_tag_dishes">
+                            <div class="stars">
+                                <div>
+                                    <i class="fa-regular fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                </div>
+                                <span>in stock</span>
+                            </div>
+                            <div class="details">
+                                <span class="name_food">
+                                    Delicious Food
+                                </span>
+                                <span>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Impedit voluptatibus
+                                    veritatis nisi atque magnam amet ducimus dicta neque ad, non placeat quos. Cum id
+                                    nisi
+                                    repellendus consequatur voluptate, commodi reprehenderit!
+                                </span>
+                                <span class="price">$ <span>15,99</span></span>
+                            </div>
+                            <div class="btn_bottom">
+                                <button>
+                                    <i class="fa-solid fa-minus"></i>
+                                </button>
+                                <span class="quantity">2</span>
+                                <button>
+                                    <i class="fa-solid fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="tag_dishes">
+                        <div class="top_tag_dishes">
+                            <div class="detail_icon">
+                                <i class="fa-regular fa-eye"></i>
+                            </div>
+                            <img src="/images/dish-1.png" alt="">
+                        </div>
+                        <div class="bottom_tag_dishes">
+                            <div class="stars">
+                                <div>
+                                    <i class="fa-regular fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                </div>
+                                <span>in stock</span>
+                            </div>
+                            <div class="details">
+                                <span class="name_food">
+                                    Delicious Food
+                                </span>
+                                <span>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Impedit voluptatibus
+                                    veritatis nisi atque magnam amet ducimus dicta neque ad, non placeat quos. Cum id
+                                    nisi
+                                    repellendus consequatur voluptate, commodi reprehenderit!
+                                </span>
+                                <span class="price">$ <span>15,99</span></span>
+                            </div>
+                            <div class="btn_bottom">
+                                <button>
+                                    <i class="fa-solid fa-minus"></i>
+                                </button>
+                                <span class="quantity">2</span>
+                                <button>
+                                    <i class="fa-solid fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="tag_dishes">
+                        <div class="top_tag_dishes">
+                            <div class="detail_icon">
+                                <i class="fa-regular fa-eye"></i>
+                            </div>
+                            <img src="/images/dish-1.png" alt="">
+                        </div>
+                        <div class="bottom_tag_dishes">
+                            <div class="stars">
+                                <div>
+                                    <i class="fa-regular fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                </div>
+                                <span>in stock</span>
+                            </div>
+                            <div class="details">
+                                <span class="name_food">
+                                    Delicious Food
+                                </span>
+                                <span>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Impedit voluptatibus
+                                    veritatis nisi atque magnam amet ducimus dicta neque ad, non placeat quos. Cum id
+                                    nisi
+                                    repellendus consequatur voluptate, commodi reprehenderit!
+                                </span>
+                                <span class="price">$ <span>15,99</span></span>
+                            </div>
+                            <div class="btn_bottom">
+                                <button>
+                                    <i class="fa-solid fa-minus"></i>
+                                </button>
+                                <span class="quantity">2</span>
+                                <button>
+                                    <i class="fa-solid fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="tag_dishes">
+                        <div class="top_tag_dishes">
+                            <div class="detail_icon">
+                                <i class="fa-regular fa-eye"></i>
+                            </div>
+                            <img src="/images/dish-1.png" alt="">
+                        </div>
+                        <div class="bottom_tag_dishes">
+                            <div class="stars">
+                                <div>
+                                    <i class="fa-regular fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                </div>
+                                <span>in stock</span>
+                            </div>
+                            <div class="details">
+                                <span class="name_food">
+                                    Delicious Food
+                                </span>
+                                <span>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Impedit voluptatibus
+                                    veritatis nisi atque magnam amet ducimus dicta neque ad, non placeat quos. Cum id
+                                    nisi
+                                    repellendus consequatur voluptate, commodi reprehenderit!
+                                </span>
+                                <span class="price">$ <span>15,99</span></span>
+                            </div>
+                            <div class="btn_bottom">
+                                <button>
+                                    <i class="fa-solid fa-minus"></i>
+                                </button>
+                                <span class="quantity">2</span>
+                                <button>
+                                    <i class="fa-solid fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="add_dishes">
+                        <button>
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class='bottom'>
+        <div class="bottom_cart">
+            <div class="left_bottom_cart">
+                <div class="method_payments">
+                    <label for="method">Choice a methods:</label>
+                    <select>
+                        <optgroup label="--Chọn phương thức thanh toán">
+                            <option value="Online">Thanh toán trực tuyến</option>
+                            <option value="inPerson">Thanh toán khi nhận hàng</option>
+                        </optgroup>
+                    </select>
+                </div>
+                <div class="address">
+                    <label for="">Your Adress</label>
+                    <input type="text" placeholder="Enter your adress">
+                </div>
+                <div class="discount">
+                    <label for="">Discount Code</label>
+                    <input type="text" placeholder="Enter discount code">
+                </div>
+                <div class="note">
+                    <label for="">Notes</label>
+                    <input type="text" placeholder="Enter your note for owner shop">
+                </div>
+
+            </div>
+            <div class="right_bottom_cart">
+                <div class="top_right_bottom_cart">
+                    <span>Totals cost:</span>
+                    <div class="stock_rate">
+                        <span>Total stock:</span>
+                        <div class="price">
+                            <span>$</span>
+                            <span>255,68</span>
+                        </div>
+                    </div>
+                    <div class="shipping_rate">
+                        <span>Shipping rates:</span>
+                        <div class="price">
+                            <span>$</span>
+                            <span>10,00</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bottom_right_bottom_cart">
+                    <div class="total">
+                        <span>$</span>
+                        <span>265,68</span>
+                    </div>
+                    <button>Order now!</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <span>Copyright © 2022 ACCB Food Inc.</span>
+    </footer>
+</body>
+
 </html>
