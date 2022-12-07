@@ -1,46 +1,278 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    This is Userpage
-    <h1>Hello</h1>
-    <%= dataUser[0].KH_TEN %>
-    <br />
-    <a href="/process_sign_out">Log out</a>
-    <br />
-    <a href="/accb_food.vn/cart">Cart</a>
-    <br />
-    <form action="/accb_food.vn/profile">
-      <button>Profile</button>
-    </form>
-    <br />
-    <table border="1" width="100%">
-      <tr>
-        <th>Tên món ăn</th>
-        <th>Miêu tả</th>
-        <th>Tình trạng</th>
-        <th>Giá</th>
-      </tr>
-      <% for(var i=0;i<3;i++) {%>
-      <tr>
-        <td><%= dataFoods[i].MAN_TEN %></td>
-        <td><%= dataFoods[i].MAN_MIEUTA %></td>
-        <td><%= dataFoods[i].MAN_TINHTRANG %></td>
-        <td><%= dataFoods[i].MAN_GIA %></td>
-        <td>
-          <form
-            action="/accb_food.vn/process_add_to_cart/id=<%=dataFoods[i].MAN_MA %>"
-          >
-            <button>Thêm vào giở hàng</button>
-          </form>
-        </td>
-      </tr>
-      <%}%>
-    </table>
-  </body>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="/fontawesome-free-6.2.1-web/css/all.css">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+
+     <!-- custom css file link  -->
+     <link rel="stylesheet" href="/css/resert.css">
+     <link rel="stylesheet" href="/css/homepage.css">
+    <title>Home</title>
+</head>
+
+<body>
+
+    <section>
+        <nav class="Navbar">
+            <img id="logo" src="/images/pic/logo.png" alt="this is logo">
+            <ul class="Navbar-Directory">
+                <li class="Navbar-Directory-item">Home</li>
+                <li class="Navbar-Directory-item">Dishes</li>
+                <li class="Navbar-Directory-item">Review</li>
+                <li class="Navbar-Directory-item">About us</li>
+            </ul>
+            <div class="Navbar-Search">
+                <input class="Navbar-Search-input" type="search" placeholder="Search">
+                <button class="Navbar-Search-btn">
+                    <span>
+                        <i class="fa-solid fa-search"></i>
+                    </span>
+                </button>
+            </div>
+
+            <div class="Nav-Subnav">
+                <div class="Nav-Subnav-love">
+                    <i class="fa-regular fa-heart"></i>
+                </div>
+                <div class="Nav-Subnav-cart">
+                    <a href="/accb_food.vn/cart">
+                        <i class="fa-sharp fa-solid fa-cart-plus"></i>
+                    </a>
+                </div>
+                <div class="Nav-Subnav-account">
+                    <a href="/accb_food.vn/profile">
+                        <i class="fa-regular fa-user"></i>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </section>
+
+    <% if(dataFoods){ %>
+    <section>
+
+        <% for(let i=0;i<1;i++){ %>
+            <div class="slide">
+                <img src="/images/pic/Slide 1.png" alt="">
+                <div class="left_slide">
+                    <span><%=dataFoods[i].MAN_TEN %></span>
+                    <span>Quench the Hunger</span>
+                    <span><%= dataFoods[i].MAN_MIEUTA %></span>
+                    <button>Order now!</button>
+                </div>
+            </div>
+        <% } %>
+        
+        <% }else{ %>
+            <span>Không có món ăn nào</span>
+        <% } %>
+
+    </section>  
+
+    <section>
+        <div class="dishes">
+
+            <div class="top_dishes">
+                <button>
+                    <i class="fa-solid fa-circle"></i>
+                    <i class="fa-solid fa-circle"></i>
+                    <i class="fa-solid fa-circle"></i>
+                </button>
+                <span>Our dishes</span>
+                <span>Popular dishes</span>
+            </div>
+
+            <div class="list_dishes">
+
+                <% for(let i =0; i<dataFoods.length ;i++){ %>
+                    <div class="tag_dishes">
+                        <div class="top_tag_dishes">
+                            <div class="detail_icon">
+                                <i class="fa-regular fa-eye"></i>
+                            </div>
+                            <div class="detail_icon">
+                                <i class="fa-regular fa-heart"></i>
+                            </div>
+                        </div>
+                        <img src="<%= dataFoods[i].MAN_IMGPATH %>" alt="" width="200px" height="150px">
+                        <div class="bottom_tag_dishes">
+                            <div class="details">
+                                <span class="name_food">
+                                    <%= dataFoods[i].MAN_TEN %>
+                                </span>
+                                <div class="stars">
+                                    <div>
+                                        <i class="fa-regular fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                    </div>
+                                </div>
+                                <span class="price">$ 
+                                    <span><%= dataFoods[i].MAN_GIA %></span>
+                                </span>
+                            </div>
+                            <form action="/accb_food.vn/addto_cart/id/'<%= dataFoods[i].MAN_MA %>'" method="GET">
+                                <button>Add to cart
+                                    <i class="fa-sharp fa-solid fa-cart-plus"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                <% } %>
+
+            </div>
+    </section>
+
+
+    <section>
+        <div class="comment">
+            <div class="comment_top">
+                <button>
+                    <i class="fa-solid fa-circle"></i>
+                    <i class="fa-solid fa-circle"></i>
+                    <i class="fa-solid fa-circle"></i>
+                </button>
+                <span>Customer’s Review</span>
+                <span>WHAT THE SAY?</span>
+            </div>
+            <div class="comment_bottom">
+                <div class="rates">
+                    <span>Your rate:</span>
+                    <div class="stars">
+                        <button>
+                            <i class="fa-regular fa-star"></i>
+                        </button>
+                        <button>
+                            <i class="fa-regular fa-star"></i>
+                        </button>
+                        <button>
+                            <i class="fa-regular fa-star"></i>
+                        </button>
+                        <button>
+                            <i class="fa-regular fa-star"></i>
+                        </button>
+                        <button>
+                            <i class="fa-regular fa-star"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="cus_cmt">
+                    <span>Your comment:</span>
+                    <form class="sub">
+                        <input type="text" placeholder="Enter your comment">
+                        <input type="submit" value="Send">
+                    </form>
+                </div>
+                <div class="list_comment">
+                    <div class="tag_comment">
+                        <div class="top_tag_comment">
+                            <div class="left_top_tag_comment">
+                                <img src="/images/pic/pic-2.png" alt="This is avatar">
+                                <div class="middel_top">
+                                    <span class="name_cus">
+                                        Hoang Van Cau
+                                    </span>
+                                    <div class="stars">
+                                        <i class="fa-regular fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="right_top_tag_comment">
+                                <i class="fa-regular fa-eye"></i>
+                            </div>
+                        </div>
+                        <div class="bottom_tag_comment">
+                            <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro mollitia deleniti autem
+                                dolore. Dolorum vitae laudantium tempora veniam. Magni quis facere aperiam, possimus
+                                cupiditate sunt dicta aliquam qui nobis delectus?
+                            </span>
+                        </div>
+                    </div>
+                    <div class="tag_comment">
+                        <div class="top_tag_comment">
+                            <div class="left_top_tag_comment">
+                                <img src="/images/pic/pic-2.png" alt="This is avatar">
+                                <div class="middel_top">
+                                    <span class="name_cus">
+                                        Hoang Van Cau
+                                    </span>
+                                    <div class="stars">
+                                        <i class="fa-regular fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="right_top_tag_comment">
+                                <i class="fa-regular fa-eye"></i>
+                            </div>
+                        </div>
+                        <div class="bottom_tag_comment">
+                            <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro mollitia deleniti autem
+                                dolore. Dolorum vitae laudantium tempora veniam. Magni quis facere aperiam, possimus
+                                cupiditate sunt dicta aliquam qui nobis delectus?
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="about_us">
+            <div class="comment_top">
+                <button>
+                    <i class="fa-solid fa-circle"></i>
+                    <i class="fa-solid fa-circle"></i>
+                    <i class="fa-solid fa-circle"></i>
+                </button>
+                <span>About us</span>
+                <span>WHY CHOOSE US?</span>
+            </div>
+            <div class="bottom_about_us">
+                <div class="left_bottom">
+                    <img src="/images/foods/about-img.png" alt="">
+                </div>
+                <div class="right_bottom">
+                    <span>Best Food In The Country</span>
+                    <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed purus eget consectetur risus,
+                        mauris. Dis metus, eget
+                        ullamcorper molestie ut iaculis imperdiet.
+                    </span>
+                    <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed purus eget consectetur risus,
+                        mauris. Dis metus, eget
+                        ullamcorper molestie ut iaculis imperdiet.
+                    </span>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <span>Copyright © 2022 ACCB Food Inc.</span>
+    </footer>
+
+
+    <script src="https://kit.fontawesome.com/9382b228af.js" crossorigin="anonymous"></script>
+</body>
+
 </html>

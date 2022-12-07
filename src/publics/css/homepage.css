@@ -1,5 +1,6 @@
 /* Google Fonts - Poppins */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+/*@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');*/
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700&display=swap');
 
 :root {
     --blue_white: #C9F5FF;
@@ -187,7 +188,7 @@ footer {
 }
 
 .left_slide span:nth-child(1) {
-    font-size: 3em;
+    font-size: 2em;
     font-weight: 800;
     color: var(--brown);
     text-shadow: 1px 1px 2px #B96B3D;

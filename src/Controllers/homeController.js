@@ -266,25 +266,25 @@ let processSign_in = async (req,res)=>{
                 return res.redirect('/accb_food.vn/admin');
             }//
             else if(s1 == 'KHACHHANG'.trim()){
-                let result = await pool.request().query(`select * from KHACHHANG where KH_MA ='${data_user[0].MA}'`);
+                let result = await pool.request().query(`select * from KHACHHANG where KH_MA='${data_user[0].MA}'`);
                 let user=result.recordset;
                 req.session.user=user;
                 return res.redirect('/accb_food.vn');
             }//
             else if(s1 == 'DOITAC'.trim()){
-                let result = await pool.request().query(`select * from DOITAC where DT_MA ='${data_user[0].MA}'`);
+                let result = await pool.request().query(`select * from DOITAC where DT_MA='${data_user[0].MA}'`);
                 let partner=result.recordset;
                 req.session.partner=partner;
                 return res.redirect('/accb_food.vn/doitac');
             }//
             else if(s1 == 'TAIXE'.trim()){
-                let result = await pool.request().query(`select * from TAIXE where TX_MA ='${data_user[0].MA}'`);
+                let result = await pool.request().query(`select * from TAIXE where TX_MA='${data_user[0].MA}'`);
                 let driver=result.recordset;
                 req.session.driver=driver;
                 return res.redirect('/accb_food.vn/taixe');
             }//
             else{
-                let result = await pool.request().query(`select * from NHANVIEN where NV_MA ='${data_user[0].MA}'`);
+                let result = await pool.request().query(`select * from NHANVIEN where NV_MA='${data_user[0].MA}'`);
                 let agent=result.recordset;
                 req.session.agent=agent;
                 return res.redirect('/accb_food.vn/nhanvien');
@@ -309,7 +309,29 @@ let processSign_out = async (req,res)=>{
 }
 //
 let getProfilepage = async (req,res)=>{
-    return res.render('profile.ejs')
+    if(req.session.user){
+        let data_address=[];
+        try {
+            await pool.connect();
+            // Dia Chi
+            let address = await pool.request().query(`select * from DIACHI where DC_MATINH='${req.session.user[0].DC_MATINH}' and DC_MAHUYEN='${req.session.user[0].DC_MAHUYEN}' and DC_MAXA='${req.session.user[0].DC_MAXA}'`)
+            data_address=address.recordset;
+            
+            return res.render('profile.ejs',{
+                dataUser: req.session.user,
+                dataAddress: data_address
+            });
+        }
+        catch (err) {
+            console.log("ERROR:", err)
+        }
+        finally {
+            pool.close();
+        }
+    }
+    else{
+        return res.redirect('/');
+    }
 }
 //
 const upload = multer().single('profile_pic');
@@ -333,6 +355,87 @@ let processUpload_file=async (req,res)=>{
     });
 }
 //
+let getCartpage =async (req,res)=>{
+    if(req.session.user){
+        let data_foods_incart=[];
+        let data_foods=[];
+        try{
+            await pool.connect();
+            // Gio hang
+            let foods_in_cart=await pool.request().query(`select * from GIOHANG where KH_MA='${req.session.user[0].KH_MA}'`);
+            data_foods_incart=foods_in_cart.recordset;
+            // Foods
+            for(let i=0;i<data_foods_incart.length;i++){
+                let foods=await pool.request().query(`select * from MONAN where MAN_MA='${data_foods_incart[i].MAN_MA}'`);
+                data_foods.push(foods.recordset[0]);
+            }
+            return res.render('cart.ejs',{
+                dataFoodsinCart: data_foods_incart,
+                dataFoods: data_foods
+            });
+
+        }catch (err) {
+            console.log("ERROR:", err)
+        }
+        finally {
+            pool.close();
+        }
+    }
+    else{
+        return res.redirect('/');
+    }   
+}
+//
+let getFoodDetailpage = (req,res)=>{
+    return res.render('fooddetail.ejs');
+}
+//
+let getOrderpage = async (req,res)=>{
+    return res.render('orders.ejs')
+}
+//
+let getAddtoCart = async (req,res)=>{
+    if(req.params && req.session.user){
+        let data_foods=[]
+        try{
+            await pool.connect();
+            // Them vao gio hang
+            let count=await pool.request().query(`select count(*) as count from GIOHANG`);
+            if(count.recordset[0].count==0){
+                await pool.request().query(`insert into GIOHANG(MAN_MA,KH_MA,SOLUONG) values (${req.params.id},'${req.session.user[0].KH_MA}', '1')`);
+                return res.redirect('/accb_food.vn/');
+            }
+            else{
+                //
+                let foods=await pool.request().query(`select * from GIOHANG where MAN_MA=${req.params.id} and KH_MA='${req.session.user[0].KH_MA}'`);
+                data_foods=foods.recordset;
+                if(data_foods.length){
+                    var soluong_bd=data_foods[0].SOLUONG;
+                    var soluong_sau=soluong_bd+1;
+                    //console.log('check==>2 ==>',`update GIOHANG set SOLUONG='${soluong_sau}' where MAN_MA=${req.params.id} and KH_MA='${req.session.user[0].KH_MA}'`)
+                    await pool.request().query(`update GIOHANG set SOLUONG='${soluong_sau}' where MAN_MA=${req.params.id} and KH_MA='${req.session.user[0].KH_MA}'`);
+                    return res.redirect('/accb_food.vn/');
+                }
+                else if(!data_foods.length){
+                    await pool.request().query(`insert into GIOHANG(MAN_MA,KH_MA,SOLUONG) values (${req.params.id},'${req.session.user[0].KH_MA}', '1')`);
+                    return res.redirect('/accb_food.vn/');
+                }
+                else{
+                    console.log("error!");
+                }
+            }
+        }catch (err) {
+            console.log("ERROR:", err)
+        }
+        finally {
+            pool.close();
+        }
+    }
+    else{
+        return res.redirect('/accb_food.vn');
+    }
+}
+//
 module.exports={
     getHomepage,
     getSign_in,
@@ -346,5 +449,9 @@ module.exports={
     getProfilepage,
     processUpload_file,
     getTest,
-    getSign_up
+    getSign_up,
+    getCartpage,
+    getFoodDetailpage,
+    getOrderpage,
+    getAddtoCart
 }
