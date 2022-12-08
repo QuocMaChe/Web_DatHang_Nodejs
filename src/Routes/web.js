@@ -53,6 +53,7 @@ const initWebRoute=(app)=>{
     router.get('/accb_food.vn/food_detail', homeController.getFoodDetailpage);
     router.get('/accb_food.vn/order', homeController.getOrderpage);
     router.get('/accb_food.vn/addto_cart/id/:id', homeController.getAddtoCart);
+    router.get('/accb_food.vn/cart/quantity/:operator/id/:id', homeController.updateQuantity);
 
     return app.use('/',router);
 }
