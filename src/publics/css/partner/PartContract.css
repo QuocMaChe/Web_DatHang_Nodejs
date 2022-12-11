@@ -1,0 +1,355 @@
+/* Google Fonts - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+:root {
+    --blue_white: #C9F5FF;
+    --green: #007A1B;
+    --Strong_green: #1B8600;
+    --Light_green: #BEE2B5;
+    --purple: #E5D4EF;
+    --Strong_purple: #6D43A7;
+    --blue: #2400FF;
+    --brown: #F3AE85;
+    --Strong_brown: #B96B3D;
+    --gray: #EEEEEE;
+    --white: #FFFFFF;
+    --black: #000000;
+    --red: #FF0000;
+
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+input {
+    border: none;
+}
+
+.Navbar {
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    box-shadow: 4px 2px 14px 1px var(--blue_white);
+    background-color: var(--white);
+}
+
+#logo {
+    display: flex;
+    margin: 0 5%;
+    height: 100%;
+    width: auto;
+}
+
+.Navbar-Directory {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-right: 15%;
+    text-align: center;
+    width: max-content;
+    height: 100%;
+}
+
+.Navbar-Directory li {
+    width: 40px;
+    font-size: 0.8em;
+    font-weight: 500;
+}
+
+.Navbar-Directory li:hover {
+    background-color: var(--blue_white);
+    opacity: 0.8;
+    cursor: pointer;
+    border-radius: 30px;
+    width: max-content;
+    height: max-content;
+}
+
+.Navbar-Directory-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    text-decoration: none;
+    margin: 0 5%;
+}
+
+.Navbar-Search {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(110, 110, 110, 0.281);
+    border-radius: 50px 20px;
+    width: 18%;
+    height: 60%;
+    background-color: var(--blue_white);
+
+}
+
+.Nav-Subnav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    margin-right: 5%;
+}
+
+.Navbar-Search-input {
+    margin-left: 3%;
+    background-color: var(--blue_white);
+    width: 90%;
+    height: 90%;
+    outline: none;
+    padding-left: 10%;
+}
+
+.Navbar-Search-btn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+    background-color: var(--blue_white);
+    opacity: 0.5;
+    margin-right: 8%;
+}
+
+.Nav-Subnav-love,
+.Nav-Subnav-cart,
+.Nav-Subnav-account {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    background-color: var(--blue_white);
+    border-radius: 50%;
+    padding: 0.5em;
+    margin: 0 0.5em;
+}
+
+.go_back {
+    display: flex;
+    justify-content: space-between;
+    padding: 2em 5em;
+}
+
+.go_back button {
+    border: none;
+    text-decoration: none;
+    font-size: 1.5em;
+    font-weight: 800;
+    color: var(--Strong_purple);
+    background-color: var(--white);
+    padding: 0 12px;
+    margin-top: 2em;
+}
+
+.go_back button:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 0.8em;
+    opacity: 0.5;
+    padding-top: 2em;
+    padding-bottom: 2em;
+    /* background-color: var(--gray); */
+}
+
+.Nav-Subnav div:hover {
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+.Navbar-Search>button:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: max-content;
+}
+
+.Title {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-items: center;
+    justify-items: center;
+}
+
+.Title span {
+    display: flex;
+    justify-self: center;
+    align-self: center;
+    line-height: 1.3em;
+}
+
+.Title span:nth-child(1) {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: var(--green);
+}
+
+.Title span:nth-child(2) {
+    font-size: 1.8em;
+    font-weight: 800;
+    color: var(--black);
+    text-transform: uppercase;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    height: max-content;
+    margin-top: 2em;
+}
+
+.contract {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    height: max-content;
+    justify-self: center;
+    align-self: center;
+    background-color: var(--gray);
+    border-radius: 20px;
+}
+
+.left_contract {
+    display: flex;
+    width: 40%;
+    height: max-content;
+    flex-direction: column;
+}
+
+.left_contract img {
+    display: flex;
+    justify-self: center;
+    align-self: center;
+    width: 50%;
+    height: 100%;
+    margin: 1em
+}
+
+.right_contract {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: max-content;
+    line-height: 1.8em;
+}
+
+.top_right_contract {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: max-content;
+    text-align: flex-start;
+
+}
+
+.top_right_contract span:nth-child(1) {
+    font-size: 1.5em;
+    font-weight: 700;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.top_right_contract span:nth-child(2) {
+    font-size: 0.9em;
+    line-height: 1.5em;
+}
+
+.bottom_right_contract {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: max-content;
+    align-items: flex-start;
+    justify-content: flex-start;
+    border-top: 1px solid #dddddd;
+    padding-top: 1em;
+}
+
+.signin_date,
+.expired_date {
+    display: flex;
+    flex-direction: row;
+    width: 60%;
+    justify-content: space-between;
+}
+
+.signin_date span:nth-child(1),
+.expired_date span:nth-child(1) {
+    font-size: 0.8em;
+    font-weight: 600;
+    color: var(--black);
+    opacity: 0.4;
+}
+
+.signin_date span:nth-child(2) {
+    font-size: 1em;
+    font-weight: 700;
+    color: var(--green);
+}
+
+.expired_date span:nth-child(2) {
+    font-size: 1em;
+    font-weight: 700;
+    color: var(--red);
+}
+
+.btn {
+    display: flex;
+    width: 80%;
+    justify-self: center;
+    align-self: center;
+
+    justify-content: space-around;
+    align-items: center;
+}
+
+.btn button {
+    border: none;
+    background-color: var(--Light_green);
+    color: var(--Strong_green);
+    width: 8em;
+    height: 2em;
+    border-radius: 20px;
+    box-shadow: 1px 1px 2px var(--Strong_green);
+    margin-bottom: 1em;
+    margin-top: 1.5em;
+}
+
+.btn button:hover {
+    cursor: pointer;
+    opacity: 0.7;
+    background-color: var(--Strong_green);
+    color: var(--white);
+}

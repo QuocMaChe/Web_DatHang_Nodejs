@@ -67,7 +67,9 @@
                     <span><%=dataFoods[i].MAN_TEN %></span>
                     <span>Quench the Hunger</span>
                     <span><%= dataFoods[i].MAN_MIEUTA %></span>
-                    <button>Order now!</button>
+                    <form action="/accb_food.vn/cart">
+                        <button>Order now!</button>
+                    </form>
                 </div>
             </div>
         <% } %>

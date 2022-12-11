@@ -147,63 +147,58 @@
       </div>
     </section>
 
-    <section class="bottom">
-      <div class="bottom_cart">
-        <div class="left_bottom_cart">
-          <div class="method_payments">
-            <label for="method">Choice a methods:</label>
-            <select>
-              <optgroup label="--Chọn phương thức thanh toán">
-                <option value="Online">Thanh toán trực tuyến</option>
-                <option value="inPerson">Thanh toán khi nhận hàng</option>
-              </optgroup>
-            </select>
-          </div>
-          <div class="address">
-            <label for="">Your Adress</label>
-            <input type="text" placeholder="Enter your adress" />
-          </div>
-          <div class="discount">
-            <label for="">Discount Code</label>
-            <input type="text" placeholder="Enter discount code" />
-          </div>
-          <div class="note">
-            <label for="">Notes</label>
-            <input type="text" placeholder="Enter your note for owner shop" />
-          </div>
-        </div>
-        <div class="right_bottom_cart">
-          <div class="top_right_bottom_cart">
-            <span>Totals cost:</span>
-            <div class="stock_rate">
-              <span>Total stock:</span>
-
-              <div class="price">
+    <form action="/accb_food.vn/process_order" method="POST">
+      <section class="bottom">
+        <div class="bottom_cart">
+            <div class="left_bottom_cart">
+              <div class="method_payments">
+                <label for="method">Choice a methods:</label>
+                <select name="pay">
+                  <optgroup label="--Chọn phương thức thanh toán">
+                    <option value="Thanh toán online">Thanh toán trực tuyến</option>
+                    <option value="Thanh toán khi nhận hàng">Thanh toán khi nhận hàng</option>
+                  </optgroup>
+                </select>
+              </div>
+            </div>
+          </form>
+  
+          <div class="right_bottom_cart">
+            <div class="top_right_bottom_cart">
+              <span>Totals cost:</span>
+              <div class="stock_rate">
+                <span>Total stock:</span>
+  
+                <div class="price">
+                  <span>$</span>
+                  <span>
+                    <%=totalCost %>
+                  </span>
+                </div>
+                
+              </div>
+              <div class="shipping_rate">
+                <span>Shipping rates:</span>
+                <div class="price">
+                  <span>$</span>
+                  <span>10000</span>
+                </div>
+              </div>
+            </div>
+            <div class="bottom_right_bottom_cart">
+              <div class="total">
                 <span>$</span>
-                <span>
-                  <%=totalCost %>
-                </span>
+                <span><%=totalCost+10000 %></span>
+
+              </div>
+                <button>Order now!</button>
               </div>
               
             </div>
-            <div class="shipping_rate">
-              <span>Shipping rates:</span>
-              <div class="price">
-                <span>$</span>
-                <span>10000</span>
-              </div>
-            </div>
-          </div>
-          <div class="bottom_right_bottom_cart">
-            <div class="total">
-              <span>$</span>
-              <span><%=totalCost+10000 %></span>
-            </div>
-            <button>Order now!</button>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </form>
 
     <footer>
       <span>Copyright © 2022 ACCB Food Inc.</span>

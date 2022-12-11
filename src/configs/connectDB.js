@@ -6,9 +6,9 @@ const config = {
     //user:'',
     //password:'',
     database: 'DOAN_HQTCSDL',
-    driver:'msnodesqlv8',
+    driver: 'msnodesqlv8',
     options: {
-       trustedConnection: true,
+        trustedConnection: true,
     }
 }
 // connect to database

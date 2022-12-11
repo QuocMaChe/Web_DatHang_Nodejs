@@ -50,23 +50,29 @@
 
         <div class="Nav-Subnav">
           <div class="Nav-Subnav-love">
-            <i class="fa-regular fa-heart"></i>
+              <i class="fa-regular fa-heart"></i>
           </div>
           <div class="Nav-Subnav-cart">
-            <i class="fa-sharp fa-solid fa-cart-plus"></i>
+              <a href="/accb_food.vn/cart">
+                  <i class="fa-sharp fa-solid fa-cart-plus"></i>
+              </a>
           </div>
           <div class="Nav-Subnav-account">
-            <i class="fa-regular fa-user"></i>
+              <a href="/accb_food.vn/profile">
+                  <i class="fa-regular fa-user"></i>
+              </a>
           </div>
-        </div>
+      </div>
       </nav>
     </section>
 
     <div class="go_back">
-      <button type="submit">
+      <form action="/accb_food.vn/cart">
+        <button type="submit">
         <i class="fa-solid fa-arrow-left"></i>
         Cart
       </button>
+      </form>
     </div>
 
     <section>
@@ -76,128 +82,44 @@
           <span>Track Your Orders</span>
         </div>
         <div class="list">
-          <div class="cart">
-            <div class="left_cart">
-              <img src="/images/foods/dish-1.png" alt="" />
-            </div>
-            <div class="right_cart">
-              <div class="stars">
-                <i class="fa-regular fa-star"></i>
-                <i class="fa-regular fa-star"></i>
-                <i class="fa-regular fa-star"></i>
-                <i class="fa-regular fa-star"></i>
-                <i class="fa-regular fa-star"></i>
-              </div>
-              <span class="name_partner">Đối tác</span>
-              <span class="name_menu">Thực đơn</span>
-              <span class="name_food">Hambuger</span>
-              <span class="detail"
-                >Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Libero cumque voluptates, modi officia animi quidem, totam rerum
-                ratione est saepe adipisci repellat non illo tempore dicta
-                dignissimos sunt dolor accusantium.</span
-              >
-              <span class="quantity">x1</span>
-              <div class="bottom_cart">
-                <span
-                  >Totals cost:
-                  <span
-                    >$
-                    <span> 265,68 </span>
-                  </span>
-                </span>
-                <div class="status">
-                  <span
-                    >Delivery status:
-                    <span>Delivering</span>
-                  </span>
-                  <button>Cancel</button>
-                </div>
-              </div>
-            </div>
-          </div>
 
-          <div class="cart">
-            <div class="left_cart">
-              <img src="/images/foods/dish-1.png" alt="" />
-            </div>
-            <div class="right_cart">
-              <div class="stars">
-                <i class="fa-regular fa-star"></i>
-                <i class="fa-regular fa-star"></i>
-                <i class="fa-regular fa-star"></i>
-                <i class="fa-regular fa-star"></i>
-                <i class="fa-regular fa-star"></i>
-              </div>
-              <span class="name_partner">Đối tác</span>
-              <span class="name_menu">Thực đơn</span>
-              <span class="name_food">Hambuger</span>
-              <span class="detail"
-                >Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Libero cumque voluptates, modi officia animi quidem, totam rerum
-                ratione est saepe adipisci repellat non illo tempore dicta
-                dignissimos sunt dolor accusantium.</span
-              >
-              <span class="quantity">x1</span>
-              <div class="bottom_cart">
-                <span
-                  >Totals cost:
-                  <span
-                    >$
-                    <span> 265,68 </span>
-                  </span>
-                </span>
-                <div class="status">
-                  <span
-                    >Delivery status:
-                    <span>Delivering</span>
-                  </span>
-                  <button>Cancel</button>
+          <%for(let i=0; i<dataOrders.length; i++){%>
+            <%if(dataOrders[i].DH_TINHTRANG!='Đã hủy'){ %>
+              <div class="cart">
+                <div class="left_cart">
+                  <img src="/images/pic/logo.png" alt="" />
+                </div>
+                <div class="right_cart">
+                  <div class="stars">
+                    <i class="fa-regular fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                  </div>
+                  <span class="name_order"><%=dataOrders[i].DH_MA%></span>
+                  <div class="bottom_cart">
+                    <span
+                      >Totals cost:
+                      <span
+                        >$
+                        <span> <%=dataOrders[i].DH_TONGTIEN%> </span>
+                      </span>
+                    </span>
+                    <div class="status">
+                      <span
+                        >Delivery status:
+                        <span><%=dataOrders[i].DH_TINHTRANG%></span>
+                      </span>
+                      <form action="/accb_food.vn/process_cancel_order/id/<%=dataOrders[i].DH_MA%>" method="post">
+                        <button>Cancel</button>
+                      </form>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-
-          <div class="cart">
-            <div class="left_cart">
-              <img src="/images/foods/dish-1.png" alt="" />
-            </div>
-            <div class="right_cart">
-              <div class="stars">
-                <i class="fa-regular fa-star"></i>
-                <i class="fa-regular fa-star"></i>
-                <i class="fa-regular fa-star"></i>
-                <i class="fa-regular fa-star"></i>
-                <i class="fa-regular fa-star"></i>
-              </div>
-              <span class="name_partner">Đối tác</span>
-              <span class="name_menu">Thực đơn</span>
-              <span class="name_food">Hambuger</span>
-              <span class="detail"
-                >Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Libero cumque voluptates, modi officia animi quidem, totam rerum
-                ratione est saepe adipisci repellat non illo tempore dicta
-                dignissimos sunt dolor accusantium.</span
-              >
-              <span class="quantity">x1</span>
-              <div class="bottom_cart">
-                <span
-                  >Totals cost:
-                  <span
-                    >$
-                    <span> 265,68 </span>
-                  </span>
-                </span>
-                <div class="status">
-                  <span
-                    >Delivery status:
-                    <span>Delivering</span>
-                  </span>
-                  <button>Cancel</button>
-                </div>
-              </div>
-            </div>
-          </div>
+            <%}%>
+          <%}%>
         </div>
       </div>
     </section>

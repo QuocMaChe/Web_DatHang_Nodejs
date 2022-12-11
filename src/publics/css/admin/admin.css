@@ -1,0 +1,405 @@
+/* Google Fonts - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+:root {
+    --blue_white: #C9F5FF;
+    --green: #007A1B;
+    --Strong_green: #1B8600;
+    --purple: #E5D4EF;
+    --Strong_purple: #6D43A7;
+    --blue: #2400FF;
+    --brown: #F3AE85;
+    --Strong_brown: #B96B3D;
+    --gray: #EEEEEE;
+    --white: #FFFFFF;
+    --black: #000000;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+input {
+    border: none;
+}
+
+.Navbar {
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    box-shadow: 4px 2px 14px 1px var(--blue_white);
+    background-color: var(--white);
+    z-index: 999;
+}
+
+#logo {
+    display: flex;
+    margin: 0 5%;
+    height: 100%;
+    width: auto;
+}
+
+.Navbar-Directory {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-right: 15%;
+    text-align: center;
+    width: max-content;
+    height: 100%;
+}
+
+.Navbar-Directory li {
+    width: 40px;
+    font-size: 0.8em;
+    font-weight: 500;
+}
+
+.Navbar-Directory li:hover {
+    background-color: var(--blue_white);
+    opacity: 0.8;
+    cursor: pointer;
+    border-radius: 30px;
+    width: max-content;
+    height: max-content;
+}
+
+.Navbar-Directory-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    text-decoration: none;
+    margin: 0 10%;
+}
+
+.Navbar-Search {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(110, 110, 110, 0.281);
+    border-radius: 50px 20px;
+    width: 18%;
+    height: 60%;
+    background-color: var(--blue_white);
+
+}
+
+.Nav-Subnav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    margin-right: 5%;
+}
+
+.Navbar-Search-input {
+    margin-left: 3%;
+    background-color: var(--blue_white);
+    width: 90%;
+    height: 90%;
+    outline: none;
+    padding-left: 10%;
+}
+
+.Navbar-Search-btn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+    background-color: var(--blue_white);
+    opacity: 0.5;
+    margin-right: 8%;
+}
+
+.Nav-Subnav-love,
+.Nav-Subnav-cart,
+.Nav-Subnav-account {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    background-color: var(--blue_white);
+    border-radius: 50%;
+    padding: 0.5em;
+    margin: 0 0.5em;
+}
+
+.Nav-Subnav div:hover {
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+.Navbar-Search>button:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 0.8em;
+    opacity: 0.5;
+    padding-top: 2em;
+    padding-bottom: 2em;
+    /* background-color: var(--gray); */
+}
+
+button {
+    border: none;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: max-content;
+    padding-top: 3em;
+}
+
+.gray_menu {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: max-content;
+    padding-top: 3em;
+    background-color: var(--gray);
+}
+
+.menu_top_dishes {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    width: 100%;
+    height: max-content;
+    margin-top: 2em;
+    line-height: 2em;
+}
+
+.menu_top_dishes button i {
+    font-size: 0.7em;
+    opacity: 0.7;
+}
+
+.menu_top_dishes button:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.menu_top_dishes span:first-of-type {
+    display: flex;
+    font-size: 1.6em;
+    font-weight: 500;
+    color: var(--Strong_green);
+}
+
+.menu_top_dishes span:last-of-type {
+    font-size: 1.7em;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.menu_list_dishes {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-self: center;
+    align-self: center;
+    width: 100%;
+    max-height: max-content;
+}
+
+.menu_tag_dishes {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 15%;
+    height: max-content;
+    border-radius: 20px;
+    background-color: rgba(197, 197, 197, 0.63);
+    box-shadow: 1px 1px 3px #000000;
+    line-height: 1.5em;
+    margin: 2em 2em 2em 4em;
+}
+
+.menu_top_tag_dishes {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+
+
+
+.menu_detail_icon {
+    background-color: var(--blue_white);
+    width: 1.5em;
+    height: 1.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: flex-start;
+    border-radius: 50%;
+    margin-top: 0.5em;
+    margin-left: 0.5em;
+}
+
+.menu_detail_icon:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.menu_bottom_tag_dishes {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: max-content;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu_details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    line-height: 1em;
+    margin: 0 1em;
+    font-size: 0.7em;
+}
+
+.menu_stars {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: max-content;
+    justify-content: space-between;
+}
+
+.menu_stars div {
+    margin-left: 1em;
+}
+
+.menu_stars span {
+    margin-right: 1em;
+    color: var(--red);
+}
+
+.menu_name_food {
+    display: flex;
+    justify-self: start;
+    align-self: start;
+    font-size: 1.4em;
+    font-weight: 800;
+    margin: 0.7em 1em;
+}
+
+.menu_details button {
+    background-color: var(--purple);
+    color: var(--blue);
+    width: 10em;
+    height: 2em;
+    border-radius: 20px;
+    box-shadow: 1px 2px 2px var(--blue);
+    margin-bottom: 2em;
+}
+
+.menu_details span:last-of-type {
+    margin-left: 1em;
+    margin-right: 1em;
+    margin-bottom: 1em;
+    word-break: normal;
+    white-space: wrap;
+    overflow: hidden;
+    /* min-height: 2em; */
+}
+
+.btn {
+    display: flex;
+    width: 100%;
+    height: max-content;
+    justify-content: space-around;
+    align-content: center;
+}
+
+.btn button {
+    background-color: var(--purple);
+    color: var(--blue);
+    width: 8em;
+    height: 2em;
+    border-radius: 20px;
+    box-shadow: 1px 2px 2px var(--blue);
+    margin-bottom: 2em;
+
+}
+
+.btn button:hover {
+    cursor: pointer;
+    background-color: var(--blue);
+    color: var(--white);
+    opacity: 0.7;
+}
+
+.btn span {
+    color: var(--Strong_green);
+    font-weight: bold;
+}
+
+.img {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+}
+
+.img img {
+    width: 90%;
+    height: 90%;
+    object-fit: cover;
+    margin-top: 1em;
+}
+
+.add_dishes {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    width: 10em;
+    height: 10em;
+    border-radius: 20px;
+    background-color: var(--gray);
+    box-shadow: 1px 1px 3px #000000;
+    margin-left: 2em;
+}
+
+.add_dishes:hover {
+    cursor: pointer;
+}
+
+.add_dishes:active {
+    background-color: var(--blue);
+    color: var(--white);
+}

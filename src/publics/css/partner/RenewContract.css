@@ -1,0 +1,334 @@
+/* Google Fonts - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+:root {
+    --blue_white: #C9F5FF;
+    --green: #009C06;
+    --Strong_green: #1B8600;
+    --purple: #E5D4EF;
+    --Strong_purple: #6D43A7;
+    --blue: #2400FF;
+    --brown: #F3AE85;
+    --Strong_brown: #B96B3D;
+    --gray: #EEEEEE;
+    --white: #FFFFFF;
+    --black: #000000;
+    --red: #9C0000;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+input {
+    border: none;
+}
+
+.Navbar {
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    box-shadow: 4px 2px 14px 1px var(--blue_white);
+    background-color: var(--white);
+    z-index: 999;
+}
+
+#logo {
+    display: flex;
+    margin: 0 5%;
+    height: 100%;
+    width: auto;
+}
+
+.Navbar-Directory {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-right: 15%;
+    text-align: center;
+    width: max-content;
+    height: 100%;
+}
+
+.Navbar-Directory li {
+    width: 40px;
+    font-size: 0.8em;
+    font-weight: 500;
+}
+
+.Navbar-Directory li:hover {
+    background-color: var(--blue_white);
+    opacity: 0.8;
+    cursor: pointer;
+    border-radius: 30px;
+    width: max-content;
+    height: max-content;
+}
+
+.Navbar-Directory-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    text-decoration: none;
+    margin: 0 5%;
+}
+
+.Navbar-Search {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(110, 110, 110, 0.281);
+    border-radius: 50px 20px;
+    width: 18%;
+    height: 60%;
+    background-color: var(--blue_white);
+
+}
+
+.Nav-Subnav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    margin-right: 5%;
+}
+
+.Navbar-Search-input {
+    margin-left: 3%;
+    background-color: var(--blue_white);
+    width: 90%;
+    height: 90%;
+    outline: none;
+    padding-left: 10%;
+}
+
+.Navbar-Search-btn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+    background-color: var(--blue_white);
+    opacity: 0.5;
+    margin-right: 8%;
+}
+
+.Nav-Subnav-love,
+.Nav-Subnav-cart,
+.Nav-Subnav-account {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    background-color: var(--blue_white);
+    border-radius: 50%;
+    padding: 0.5em;
+    margin: 0 0.5em;
+}
+
+.Nav-Subnav div:hover {
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+.Navbar-Search>button:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 0.8em;
+    opacity: 0.5;
+    padding-top: 2em;
+    padding-bottom: 2em;
+    /* background-color: var(--gray); */
+}
+
+.go_back {
+    display: flex;
+    justify-content: space-between;
+    padding: 2em 5em 1em 5em;
+}
+
+.go_back button {
+    border: none;
+    text-decoration: none;
+    font-size: 1.5em;
+    font-weight: 800;
+    color: var(--Strong_purple);
+    background-color: var(--white);
+    padding: 0 12px;
+    margin-top: 2em;
+}
+
+.go_back button:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.top {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: max-content;
+    justify-items: center;
+    align-items: center;
+    /* background-color: var(--gray); */
+}
+
+.top_top {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    width: 100%;
+    height: max-content;
+    margin-top: 2em;
+    line-height: 2em;
+}
+
+.top_top span:first-of-type {
+    display: flex;
+    font-size: 1.6em;
+    font-weight: 500;
+    color: var(--Strong_green);
+}
+
+.top_top span:last-of-type {
+    font-size: 1.7em;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+
+.bottom_top {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    width: 80%;
+    border-radius: 20px;
+    /* background-color: #000000; */
+}
+
+.bottom_top-Title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 100%;
+    margin-top: 2em;
+}
+
+.top_title {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-content: flex-end;
+    line-height: 2em;
+    width: 100%;
+}
+
+
+.top_title span {
+    font-size: 2em;
+    font-weight: 700;
+    display: flex;
+    justify-self: center;
+    align-self: center;
+    margin-right: 4em;
+    color: var(--Strong_purple);
+    text-shadow: 1px 1px 2px var(--blue);
+}
+
+
+.top_title img {
+    border-radius: 50%;
+    width: 20%;
+    height: max-content;
+    margin-right: 4em;
+}
+
+.bottom_top_container {
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    align-self: center;
+    width: 100%;
+    line-height: 2em;
+    padding: 2em
+}
+
+.bottom_top_container div {
+    display: flex;
+    flex-direction: column;
+    margin: 1em;
+}
+
+.bottom_top_container label {
+    font-size: 0.8em;
+    opacity: 0.7;
+}
+
+.bottom_top_container span {
+    display: flex;
+    width: 100%;
+    background-color: var(--blue_white);
+    border-radius: 20px 15px;
+    padding: 0.5em;
+    margin: 0 0.5em;
+    box-shadow: 2px 2px 2px var(--gray);
+    padding-left: 2em;
+}
+
+.term {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: max-content;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn_renew {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    width: 10em;
+    height: 3em;
+    font-size: 1em;
+    border-radius: 20px;
+    border: none;
+    background-color: var(--purple);
+    color: var(--blue);
+    box-shadow: 1px 2px 1px var(--blue_white);
+    margin-top: 3em;
+    margin-bottom: 3em;
+    margin-left: 40em;
+}
+
+.btn_renew:hover {
+    cursor: pointer;
+    opacity: 0.7;
+    background-color: var(--blue_white);
+}

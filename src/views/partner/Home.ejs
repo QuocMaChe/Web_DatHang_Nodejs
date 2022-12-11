@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/resert.css" />
+    <link rel="stylesheet" href="/css/partner/Home.css" />
+    <link rel="stylesheet" href="/fontawesome-free-6.2.1-web/css/all.css" />
+    <title>Home</title>
+  </head>
+
+  <body>
+    <section>
+      <nav class="Navbar">
+        <img id="logo" src="/images/pic/logo.png" alt="this is logo" />
+        <ul class="Navbar-Directory">
+          <li class="Navbar-Directory-item">Home</li>
+          <li class="Navbar-Directory-item">Shop</li>
+          <li class="Navbar-Directory-item">Branch</li>
+          <li class="Navbar-Directory-item">Order</li>
+          <li class="Navbar-Directory-item">Contract</li>
+          <li class="Navbar-Directory-item">About us</li>
+        </ul>
+        <div class="Navbar-Search">
+          <input
+            class="Navbar-Search-input"
+            type="search"
+            placeholder="Search"
+          />
+          <button class="Navbar-Search-btn">
+            <span>
+              <i class="fa-solid fa-search"></i>
+            </span>
+          </button>
+        </div>
+
+        <div class="Nav-Subnav">
+          <div class="Nav-Subnav-account">
+            <i class="fa-regular fa-user"></i>
+          </div>
+        </div>
+      </nav>
+    </section>
+
+    <section>
+      <div class="slide">
+        <img src="/images/pic/Slide 1.png" alt=""/>
+        <div class="left_slide">
+          <span><%=dataFoods[0].MAN_TEN%></span>
+  
+          <span>
+            <%=dataFoods[0].MAN_MIEUTA%>
+          </span>
+        
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="menu">
+        <div class="menu_top_dishes">
+          <button>
+            <i class="fa-solid fa-circle"></i>
+            <i class="fa-solid fa-circle"></i>
+            <i class="fa-solid fa-circle"></i>
+          </button>
+          <span>Our Menu</span>
+          <span>TODAY’S SPECIALITY</span>
+        </div>
+        <div class="menu_list_dishes">
+
+           <% for(let i =0; i<dataFoods.length ;i++){ %>
+            <div class="menu_tag_dishes">
+              <div class="menu_top_tag_dishes">
+                <div class="menu_detail_icon">
+                  <i class="fa-regular fa-eye"></i>
+                </div>
+                <div class="menu_detail_icon">
+                  <i class="fa-solid fa-xmark"></i>
+                </div>
+              </div>
+              <img src="<%= dataFoods[i].MAN_IMGPATH %>" alt="" width="200px" height="150px">
+              <div class="menu_bottom_tag_dishes">
+                <div class="menu_details">
+                  <div class="menu_stars">
+                    <div>
+                      <i class="fa-regular fa-star"></i>
+                      <i class="fa-regular fa-star"></i>
+                      <i class="fa-regular fa-star"></i>
+                      <i class="fa-regular fa-star"></i>
+                      <i class="fa-regular fa-star"></i>
+                    </div>
+                    <span><%=dataFoods[i].MAN_TINHTRANG%></span>
+                  </div>
+                  <span class="menu_name_food"> <%=dataFoods[i].MAN_TEN%> </span>
+                  <span>
+                    <%=dataFoods[i].MAN_MIEUTA%>
+                  </span>
+                </div>
+                <div class="btn_bottom">
+                  <button>
+                    <i class="fa-solid fa-minus"></i>
+                  </button>
+                  <span class="price">$ <span><%=dataFoods[i].MAN_GIA%></span></span>
+                  <button>
+                    <i class="fa-solid fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          <%}%>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="branch">
+        <div class="branch_top">
+          <button>
+            <i class="fa-solid fa-circle"></i>
+            <i class="fa-solid fa-circle"></i>
+            <i class="fa-solid fa-circle"></i>
+          </button>
+          <span>Our Branch</span>
+          <span>Branches</span>
+        </div>
+
+        <div class="branch_list">
+
+          <% for(let i=0; i<dataBranch.lenght; i++){ %>
+          <div class="branch_tag">
+            <div class="left_tag">
+              <img
+                src="/images/pic/Lovepik_com-401432553-building.png"
+                alt=""
+              />
+            </div>
+            <div class="right_tag">
+              <span><%dataBranch[i].CN_TEN%></span>
+              <span>
+
+              </span>
+              <div class="right_cart-button">
+                <button>Details</button>
+              </div>
+            </div>
+          </div>
+          <%}%>
+          
+        </div>
+      </div>
+    </section>
+    <footer>
+      <span>Copyright © 2022 ACCB Food Inc.</span>
+    </footer>
+
+    <script
+      src="https://kit.fontawesome.com/9382b228af.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

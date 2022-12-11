@@ -11,7 +11,7 @@ const app = express();
 const port = process.env.PORT;
 
 //route pramas
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 //
