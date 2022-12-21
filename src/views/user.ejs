@@ -25,10 +25,11 @@
         <nav class="Navbar">
             <img id="logo" src="/images/pic/logo.png" alt="this is logo">
             <ul class="Navbar-Directory">
-                <li class="Navbar-Directory-item">Home</li>
+                <li class="Navbar-Directory-item">
+                    <a href="/accb_food.vn" underline="none">Home</a>
+                </li>
                 <li class="Navbar-Directory-item">Dishes</li>
                 <li class="Navbar-Directory-item">Review</li>
-                <li class="Navbar-Directory-item">About us</li>
             </ul>
             <div class="Navbar-Search">
                 <input class="Navbar-Search-input" type="search" placeholder="Search">
@@ -53,26 +54,32 @@
                         <i class="fa-regular fa-user"></i>
                     </a>
                 </div>
+                <div class="Nav-Subnav-love">
+                    <form action="/process_sign_out">
+                        <button>
+                          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        </button>
+                      </form>
+                </div>
             </div>
         </nav>
     </section>
 
-    <% if(dataFoods){ %>
     <section>
-
-        <% for(let i=0;i<1;i++){ %>
-            <div class="slide">
-                <img src="/images/pic/Slide 1.png" alt="">
-                <div class="left_slide">
-                    <span><%=dataFoods[i].MAN_TEN %></span>
-                    <span>Quench the Hunger</span>
-                    <span><%= dataFoods[i].MAN_MIEUTA %></span>
-                    <form action="/accb_food.vn/cart">
-                        <button>Order now!</button>
-                    </form>
+        <% if(dataFoods){ %>
+            <% for(let i=0;i<1;i++){ %>
+                <div class="slide">
+                    <img src="/images/pic/Slide 1.png" alt="">
+                    <div class="left_slide">
+                        <span><%=dataFoods[i].MAN_TEN %></span>
+                        <span>Quench the Hunger</span>
+                        <span><%= dataFoods[i].MAN_MIEUTA %></span>
+                        <form action="/accb_food.vn/cart">
+                            <button>Order now!</button>
+                        </form>
+                    </div>
                 </div>
-            </div>
-        <% } %>
+            <% } %>
         
         <% }else{ %>
             <span>Không có món ăn nào</span>
@@ -99,13 +106,17 @@
                     <div class="tag_dishes">
                         <div class="top_tag_dishes">
                             <div class="detail_icon">
-                                <i class="fa-regular fa-eye"></i>
+                                <form action="/accb_food.vn/food_detail/id/<%=dataFoods[i].MAN_MA %>" method="get">
+                                    <button>
+                                        <i class="fa-regular fa-eye"></i>
+                                    </button>
+                                </form>
                             </div>
                             <div class="detail_icon">
                                 <i class="fa-regular fa-heart"></i>
                             </div>
                         </div>
-                        <img src="<%= dataFoods[i].MAN_IMGPATH %>" alt="" width="200px" height="150px">
+                        <img src="<%=dataFoods[i].MAN_IMGPATH %>" alt="" width="200px" height="150px">
                         <div class="bottom_tag_dishes">
                             <div class="details">
                                 <span class="name_food">
@@ -180,7 +191,7 @@
                     <div class="tag_comment">
                         <div class="top_tag_comment">
                             <div class="left_top_tag_comment">
-                                <img src="/images/pic/pic-2.png" alt="This is avatar">
+                                <img src="/images/pic/pic-1.png" alt="This is avatar">
                                 <div class="middel_top">
                                     <span class="name_cus">
                                         Hoang Van Cau
@@ -208,10 +219,10 @@
                     <div class="tag_comment">
                         <div class="top_tag_comment">
                             <div class="left_top_tag_comment">
-                                <img src="/images/pic/pic-2.png" alt="This is avatar">
+                                <img src="/images/pic/pic-3.png" alt="This is avatar">
                                 <div class="middel_top">
                                     <span class="name_cus">
-                                        Hoang Van Cau
+                                        Nguyễn Đình Cường
                                     </span>
                                     <div class="stars">
                                         <i class="fa-regular fa-star"></i>
@@ -252,7 +263,7 @@
             </div>
             <div class="bottom_about_us">
                 <div class="left_bottom">
-                    <img src="/images/foods/about-img.png" alt="">
+                    <img src="/images/pic/about-img.png" alt="">
                 </div>
                 <div class="right_bottom">
                     <span>Best Food In The Country</span>

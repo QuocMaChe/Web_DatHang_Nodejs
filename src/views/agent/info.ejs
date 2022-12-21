@@ -1,102 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/resert.css">
-    <link rel="stylesheet" href="/css/agent/info.css">
-    <link rel="stylesheet" href="/fontawesome-free-6.2.1-web/css/all.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/resert.css" />
+    <link rel="stylesheet" href="/css/agent/info.css" />
+    <link rel="stylesheet" href="/fontawesome-free-6.2.1-web/css/all.css" />
+    <style>
+      #GFG {
+        text-decoration: none;
+      }
+      a {
+        color: black;
+      }
+    </style>
     <title>Customner Report</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <section>
-        <nav class="Navbar">
-            <img id="logo" src="/images/LOGO.png" alt="this is logo">
-            <ul class="Navbar-Directory">
-                <li class="Navbar-Directory-item">Home</li>
-                <li class="Navbar-Directory-item">Partner</li>
-                <li class="Navbar-Directory-item">Contract</li>
-                <li class="Navbar-Directory-item">About us</li>
-            </ul>
+      <nav class="Navbar">
+        <img id="logo" src="/images/pic/logo.png" alt="this is logo" />
+        <ul class="Navbar-Directory">
+          <a href="/accb_food.vn/nhanvien/employee_partner" id="GFG">
+            <li class="Navbar-Directory-item">Partner</li>
+          </a>
 
-            <div class="Navbar-Search">
-                <input class="Navbar-Search-input" type="search" placeholder="Search">
-                <button class="Navbar-Search-btn">
-                    <span>
-                        <i class="fa-solid fa-search"></i>
-                    </span>
-                </button>
-            </div>
+          <li>
+            <!--
+                @@
+            -->
+          </li>
 
-            <div class="Nav-Subnav">
-                <div class="Nav-Subnav-love">
-                    <i class="fa-regular fa-heart"></i>
-                </div>
-                <div class="Nav-Subnav-cart">
-                    <i class="fa-sharp fa-solid fa-cart-plus"></i>
-                </div>
-                <div class="Nav-Subnav-account">
-                    <i class="fa-regular fa-user"></i>
-                </div>
-            </div>
-        </nav>
+          <a href="/accb_food.vn/nhanvien/" id="GFG">
+            <li class="Navbar-Directory-item">Contract</li>
+          </a>
+        </ul>
+        <div class="Navbar-Search">
+          <input
+            class="Navbar-Search-input"
+            type="search"
+            placeholder="Search"
+          />
+          <button class="Navbar-Search-btn">
+            <span>
+              <i class="fa-solid fa-search"></i>
+            </span>
+          </button>
+        </div>
+
+        <div class="Nav-Subnav">
+          <!-- <div class="Nav-Subnav-love">
+                      <i class="fa-regular fa-heart"></i>
+                  </div>
+                  <div class="Nav-Subnav-cart">
+                      <i class="fa-sharp fa-solid fa-cart-plus"></i>
+                  </div> -->
+          <div class="Nav-Subnav-account">
+            <form action="/accb_food.vn/nhanvien/profile">
+              <button>
+                <i class="fa-regular fa-user"></i>
+              </button>
+            </form>
+          </div>
+          <div class="Nav-Subnav-account">
+            <form action="/process_sign_out">
+              <button>
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </nav>
     </section>
 
-    <div class="go_back">
-        <button type="submit">
-            <i class="fa-solid fa-arrow-left"></i>
-            Information
-        </button>
-    </div>
-
-    </div>
     <section>
+      <div class="go_back">
+        <!--
+            @@
+          -->
+      </div>
+    </section>
+
+    <section>
+      <form action="/accb_food.vn/nhanvien/edit_profile" method="post">
         <div class="container">
             <div class="left_container">
-                <div class="top_left_container">
-                    <span>My profile</span>
-                    <span>Manage profile information for account security</span>
+              <div class="top_left_container">
+                <span>My profile</span>
+                <span>Manage profile information for account security</span>
+              </div>
+              <div class="bottom_left_container">
+                <div class="name">
+                  <label for="">Your Name</label>
+                  <input value="<%=dataAgent[0].NV_TEN%>" name="name">
+                  </input>
                 </div>
-                <div class="bottom_left_container">
-                    <div class="name">
-                        <label for="">Your Name</label>
-                        <span>Hoang Van Cau</span>
-                    </div>
-                    <div class="gende">
-                        <label for="">Gentle</label>
-                        <span>Nam</span>
-                    </div>
-                    <div class="ID">
-                        <label for="">ID</label>
-                        <span>0123456789</span>
-                    </div>
-                    <div class="address">
-                        <label for="">Address</label>
-                        <span>KTX khu B, DHQG TP.HCM</span>
-                    </div>
-                    <div class="phone_number">
-                        <label for="">Phone Number</label>
-                        <span>987654321</span>
-                    </div>
-                    <button>Edit</button>
+                <div class="mail">
+                    <label for="">Email</label>
+                    <input value="<%=dataAgent[0].NV_MAIL%>" name="mail">
+                    </input>
+                  </div>
+                <div class="gende">
+                  <label for="">Gentle</label>
+                  <input value="<%=dataAgent[0].NV_GIOITINH%>" name="sex">
+                  </input>
                 </div>
+                <div class="ID">
+                  <label for="">ID</label>
+                  <input value="<%=dataAgent[0].NV_CMND%>" name="cmnd"></input>
+                </div>
+                <div class="phone_number">
+                  <label for="">Phone Number</label>
+                  <input value="<%=dataAgent[0].NV_SDT%>" name="phone_number"></input>
+                </div>
+                <button>Edit</button>
+              </div>
             </div>
             <div class="right_container">
-                <img src="/images/pic-3.png" alt="This is avatar">
-                <span>Hoang Cau</span>
-                <span>hoangcau14783@gmail.com</span>
+              <!--
+                @@@
+              -->
             </div>
-        </div>
+          </div>
+      </form>
     </section>
 
     <footer>
-        <span>Copyright © 2022 ACCB Food Inc.</span>
+      <span>Copyright © 2022 ACCB Food Inc.</span>
     </footer>
 
-    <script src="https://kit.fontawesome.com/9382b228af.js" crossorigin="anonymous"></script>
-</body>
-
+    <script
+      src="https://kit.fontawesome.com/9382b228af.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>

@@ -7,6 +7,15 @@
     <link rel="stylesheet" href="/css/resert.css" />
     <link rel="stylesheet" href="/css/partner/Home.css" />
     <link rel="stylesheet" href="/fontawesome-free-6.2.1-web/css/all.css" />
+
+    <style>
+      #GFG {
+          text-decoration: none;
+      }
+      a { 
+        color: black;
+      }
+    </style>
     <title>Home</title>
   </head>
 
@@ -15,11 +24,25 @@
       <nav class="Navbar">
         <img id="logo" src="/images/pic/logo.png" alt="this is logo" />
         <ul class="Navbar-Directory">
-          <li class="Navbar-Directory-item">Home</li>
-          <li class="Navbar-Directory-item">Shop</li>
-          <li class="Navbar-Directory-item">Branch</li>
-          <li class="Navbar-Directory-item">Order</li>
-          <li class="Navbar-Directory-item">Contract</li>
+
+          <li class="Navbar-Directory-item">
+            <a href="/accb_food.vn/doitac" id="GFG">Home</a>
+          </li>
+
+          <li class="Navbar-Directory-item">
+            <a href="/accb_food.vn/doitac/shop" id="GFG">Shop</a>
+          </li>
+          
+          <li class="Navbar-Directory-item">
+            <a href="/accb_food.vn/doitac/orders" id="GFG">Order</a>
+          </li>
+
+          <!--
+          <li class="Navbar-Directory-item">
+            <a href="/accb_food.vn/doitac/part_contracts" id="GFG">Contract</a>
+          </li>
+          -->
+          
           <li class="Navbar-Directory-item">About us</li>
         </ul>
         <div class="Navbar-Search">
@@ -35,11 +58,15 @@
           </button>
         </div>
 
-        <div class="Nav-Subnav">
-          <div class="Nav-Subnav-account">
-            <i class="fa-regular fa-user"></i>
+          <div class="Nav-Subnav">
+            <div class="Nav-Subnav-account">
+              <form action="/process_sign_out">
+                <button>
+                  <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                </button>
+              </form>
+            </div>
           </div>
-        </div>
       </nav>
     </section>
 
@@ -56,64 +83,6 @@
         </div>
       </div>
     </section>
-
-    <section>
-      <div class="menu">
-        <div class="menu_top_dishes">
-          <button>
-            <i class="fa-solid fa-circle"></i>
-            <i class="fa-solid fa-circle"></i>
-            <i class="fa-solid fa-circle"></i>
-          </button>
-          <span>Our Menu</span>
-          <span>TODAY’S SPECIALITY</span>
-        </div>
-        <div class="menu_list_dishes">
-
-           <% for(let i =0; i<dataFoods.length ;i++){ %>
-            <div class="menu_tag_dishes">
-              <div class="menu_top_tag_dishes">
-                <div class="menu_detail_icon">
-                  <i class="fa-regular fa-eye"></i>
-                </div>
-                <div class="menu_detail_icon">
-                  <i class="fa-solid fa-xmark"></i>
-                </div>
-              </div>
-              <img src="<%= dataFoods[i].MAN_IMGPATH %>" alt="" width="200px" height="150px">
-              <div class="menu_bottom_tag_dishes">
-                <div class="menu_details">
-                  <div class="menu_stars">
-                    <div>
-                      <i class="fa-regular fa-star"></i>
-                      <i class="fa-regular fa-star"></i>
-                      <i class="fa-regular fa-star"></i>
-                      <i class="fa-regular fa-star"></i>
-                      <i class="fa-regular fa-star"></i>
-                    </div>
-                    <span><%=dataFoods[i].MAN_TINHTRANG%></span>
-                  </div>
-                  <span class="menu_name_food"> <%=dataFoods[i].MAN_TEN%> </span>
-                  <span>
-                    <%=dataFoods[i].MAN_MIEUTA%>
-                  </span>
-                </div>
-                <div class="btn_bottom">
-                  <button>
-                    <i class="fa-solid fa-minus"></i>
-                  </button>
-                  <span class="price">$ <span><%=dataFoods[i].MAN_GIA%></span></span>
-                  <button>
-                    <i class="fa-solid fa-plus"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          <%}%>
-        </div>
-      </div>
-    </section>
-
     <section>
       <div class="branch">
         <div class="branch_top">
@@ -128,26 +97,28 @@
 
         <div class="branch_list">
 
-          <% for(let i=0; i<dataBranch.lenght; i++){ %>
-          <div class="branch_tag">
-            <div class="left_tag">
-              <img
-                src="/images/pic/Lovepik_com-401432553-building.png"
-                alt=""
-              />
-            </div>
-            <div class="right_tag">
-              <span><%dataBranch[i].CN_TEN%></span>
-              <span>
+          <% for(let i=0; i<dataBranch.length; i++){ %>
+            <div class="branch_tag">
+              <div class="left_tag">
+                <img
+                  src="/images/pic/Lovepik_com-401432553-building.png"
+                  alt=""
+                />
+              </div>
+              <div class="right_tag">
+                <span><%=dataBranch[i].CN_TEN%></span>
+                <span>
 
-              </span>
-              <div class="right_cart-button">
-                <button>Details</button>
+                </span>
+                <div class="right_cart-button">
+                  <form action="/accb_food.vn/doitac/branch/id/<%=dataBranch[i].CN_MA%>">
+                    <button>Details</button>
+                  </form>
+                </div>
               </div>
             </div>
-          </div>
           <%}%>
-          
+
         </div>
       </div>
     </section>

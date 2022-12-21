@@ -8,18 +8,29 @@
     <link rel="stylesheet" href="/css/resert.css">
     <link rel="stylesheet" href="/css/driver/info.css">
     <link rel="stylesheet" href="/fontawesome-free-6.2.1-web/css/all.css">
+
+    <style>
+        #GFG {
+            text-decoration: none;
+        }
+        a { 
+          color: black;
+        }
+      </style>
     <title>Customner Report</title>
 </head>
 
 <body>
     <section>
         <nav class="Navbar">
-            <img id="logo" src="/images/LOGO.png" alt="this is logo">
+            <img id="logo" src="/images/pic/logo.png" alt="this is logo">
             <ul class="Navbar-Directory">
-                <li class="Navbar-Directory-item">Home</li>
-                <li class="Navbar-Directory-item">Partner</li>
-                <li class="Navbar-Directory-item">Wallet</li>
-                <li class="Navbar-Directory-item">About us</li>
+                <li class="Navbar-Directory-item">
+                    <a href="/accb_food.vn/taixe/" id="GFG">Order</a>
+                </li>
+                <li class="Navbar-Directory-item">
+                    <a href="/accb_food.vn/taixe/wallet" id="GFG">Wallet</a>
+                </li>
             </ul>
 
             <div class="Navbar-Search">
@@ -32,14 +43,17 @@
             </div>
 
             <div class="Nav-Subnav">
-                <div class="Nav-Subnav-love">
-                    <i class="fa-regular fa-heart"></i>
-                </div>
-                <div class="Nav-Subnav-cart">
-                    <i class="fa-sharp fa-solid fa-cart-plus"></i>
-                </div>
                 <div class="Nav-Subnav-account">
-                    <i class="fa-regular fa-user"></i>
+                    <a href="/accb_food.vn/taixe/profile">
+                        <i class="fa-regular fa-user"></i>
+                    </a>
+                </div>
+                <div class="Nav-Subnav-love">
+                    <form action="/process_sign_out">
+                        <button>
+                          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        </button>
+                      </form>
                 </div>
             </div>
         </nav>
@@ -54,51 +68,49 @@
 
     </div>
     <section>
-        <div class="container">
-            <div class="left_container">
-                <div class="top_left_container">
-                    <span>My profile</span>
-                    <span>Manage profile information for account security</span>
+        <form action="/accb_food.vn/taixe/edit_profile" method="post">
+            <div class="container">
+                <div class="left_container">
+                    <div class="top_left_container">
+                        <span>My profile</span>
+                        <span>Manage profile information for account security</span>
+                    </div>
+                    <div class="bottom_left_container">
+                        <div class="name">
+                            <label for="">Your Name</label>
+                            <input name="name" value="<%=dataDriver[0].TX_TEN%>">
+                        </div>
+                        <div class="gende">
+                            <label for="">Gentle</label>
+                            <input name="sex" value="<%=dataDriver[0].TX_GIOITINH%>">
+                        </div>
+                        <div class="ID">
+                            <label for="">ID</label>
+                            <input name="cmnd" value="<%=dataDriver[0].TX_CMND%>">
+                        </div>
+                        <div class="Phone">
+                            <label for="">Phone Number</label>
+                            <input name="sdt" value="<%=dataDriver[0].TX_SDT%>">
+                        </div>
+                        <div class="license_plates">
+                            <label for="">License Plates</label>
+                            <input name="bike_number" value="<%=dataDriver[0].TX_BIENSOXE%>">
+                        </div>
+                    
+                        <div class="bank_number">
+                            <label for="">Bank Account Number</label>
+                            <input name="bank_number" value="<%=dataDriver[0].TX_STK%>">
+                        </div>
+                        <button>Edit</button>
+                    </div>
                 </div>
-                <div class="bottom_left_container">
-                    <div class="name">
-                        <label for="">Your Name</label>
-                        <span>Hoang Van Cau</span>
-                    </div>
-                    <div class="gende">
-                        <label for="">Gentle</label>
-                        <span>Nam</span>
-                    </div>
-                    <div class="ID">
-                        <label for="">ID</label>
-                        <span>0123456789</span>
-                    </div>
-                    <div class="address">
-                        <label for="">Activity Address</label>
-                        <span>KTX khu B, DHQG TP.HCM</span>
-                    </div>
-
-                    <div class="license_plates">
-                        <label for="">License Plates</label>
-                        <span>47G1-062.24</span>
-                    </div>
-                    <div class="address">
-                        <label for="">Activity Address</label>
-                        <span>KTX khu B, DHQG TP.HCM</span>
-                    </div>
-                    <div class="bank_number">
-                        <label for="">Bank Account Number</label>
-                        <span>64469876543216446987654321</span>
-                    </div>
-                    <button>Edit</button>
+                <div class="right_container">
+                    <!--
+                        @@
+                    -->
                 </div>
             </div>
-            <div class="right_container">
-                <img src="/images/pic-3.png" alt="This is avatar">
-                <span>Hoang Cau</span>
-                <span>hoangcau14783@gmail.com</span>
-            </div>
-        </div>
+        </form>
     </section>
 
     <footer>

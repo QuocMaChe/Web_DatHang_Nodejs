@@ -8,21 +8,47 @@
     <link rel="stylesheet" href="/css/resert.css">
     <link rel="stylesheet" href="/css/partner/PartContract.css">
     <link rel="stylesheet" href="/fontawesome-free-6.2.1-web/css/all.css">
+
+    <style>
+        #GFG {
+            text-decoration: none;
+        }
+        a { 
+          color: black;
+        }
+      </style>
+
     <title>Contract</title>
 </head>
 
 <body>
     <section>
         <nav class="Navbar">
-            <img id="logo" src="/images/LOGO.png" alt="this is logo">
+            <img id="logo" src="/images/pic/logo.png" alt="this is logo">
             <ul class="Navbar-Directory">
-                <li class="Navbar-Directory-item">Home</li>
-                <li class="Navbar-Directory-item">Dishes</li>
-                <li class="Navbar-Directory-item">Menu</li>
-                <li class="Navbar-Directory-item">Review</li>
-                <li class="Navbar-Directory-item">Order</li>
+
+                <li class="Navbar-Directory-item">
+                  <a href="/accb_food.vn/doitac" id="GFG">Home</a>
+                </li>
+                
+                <li class="Navbar-Directory-item">
+                    <a href="/accb_food.vn/doitac/menu" id="GFG">Menu</a>
+                </li>
+
+                <li class="Navbar-Directory-item">
+                  <a href="/accb_food.vn/doitac/shop" id="GFG">Shop</a>
+                </li>
+      
+                <li class="Navbar-Directory-item">
+                  <a href="/accb_food.vn/doitac/orders" id="GFG">Order</a>
+                </li>
+      
+                <li class="Navbar-Directory-item">
+                 <a href="/accb_food.vn/doitac/part_contracts" id="GFG">Contract</a>
+                </li>
+                
                 <li class="Navbar-Directory-item">About us</li>
-            </ul>
+              </ul>
 
             <div class="Navbar-Search">
                 <input class="Navbar-Search-input" type="search" placeholder="Search">
@@ -34,16 +60,14 @@
             </div>
 
             <div class="Nav-Subnav">
-                <div class="Nav-Subnav-love">
-                    <i class="fa-regular fa-heart"></i>
-                </div>
-                <div class="Nav-Subnav-cart">
-                    <i class="fa-sharp fa-solid fa-cart-plus"></i>
-                </div>
                 <div class="Nav-Subnav-account">
-                    <i class="fa-regular fa-user"></i>
+                  <form action="/process_sign_out">
+                    <button>
+                      <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    </button>
+                  </form>
                 </div>
-            </div>
+              </div>
         </nav>
     </section>
 
@@ -63,7 +87,7 @@
             <div class="list">
                 <div class="contract">
                     <div class="left_contract">
-                        <img src="/images/pic-3.png" alt="">
+                        <img src="/images/pic/pic-3.png" alt="">
                     </div>
                     <div class="right_contract">
                         <div class="top_right_contract">
@@ -86,10 +110,14 @@
                             </div>
                             <div class="btn">
                                 <div class="left_btn">
-                                    <button>Renewal</button>
+                                    <form action="/accb_food.vn/doitac/renew_contract">
+                                        <button>Renewal</button>
+                                    </form>
                                 </div>
                                 <div class="right_btn">
-                                    <button>Details</button>
+                                    <form action="/accb_food.vn/doitac/contract_detail">
+                                        <button>Detail</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>

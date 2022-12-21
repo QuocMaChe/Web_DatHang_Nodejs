@@ -280,7 +280,7 @@ footer {
     opacity: 0.7;
 }
 
-.bottom_top_container span {
+.bottom_top_container input {
     display: flex;
     width: 100%;
     background-color: var(--blue_white);

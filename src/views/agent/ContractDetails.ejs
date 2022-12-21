@@ -7,18 +7,35 @@
     <link rel="stylesheet" href="/css/resert.css" />
     <link rel="stylesheet" href="/css/agent/ContractDetails.css" />
     <link rel="stylesheet" href="/fontawesome-free-6.2.1-web/css/all.css" />
+
+    <style>
+      #GFG {
+        text-decoration: none;
+      }
+      a {
+        color: black;
+      }
+    </style>
+
     <title>Contract Details</title>
   </head>
 
   <body>
     <section>
       <nav class="Navbar">
-        <img id="logo" src="/images/LOGO.png" alt="this is logo" />
+        <img id="logo" src="/images/pic/logo.png" alt="this is logo" />
         <ul class="Navbar-Directory">
-          <li class="Navbar-Directory-item">Home</li>
-          <li class="Navbar-Directory-item">Partner</li>
-          <li class="Navbar-Directory-item">Contract</li>
-          <li class="Navbar-Directory-item">About us</li>
+          <a href="/accb_food.vn/nhanvien/employee_partner">
+            <li class="Navbar-Directory-item">Partner</li>
+          </a>
+          <li>
+            <!--
+                @@
+            -->
+          </li>
+          <a href="/accb_food.vn/nhanvien/">
+            <li class="Navbar-Directory-item">Contract</li>
+          </a>
         </ul>
         <div class="Navbar-Search">
           <input
@@ -41,7 +58,18 @@
                     <i class="fa-sharp fa-solid fa-cart-plus"></i>
                 </div> -->
           <div class="Nav-Subnav-account">
-            <i class="fa-regular fa-user"></i>
+            <form action="/accb_food.vn/nhanvien/profile">
+              <button>
+                <i class="fa-regular fa-user"></i>
+              </button>
+            </form>
+          </div>
+          <div class="Nav-Subnav-account">
+            <form action="/process_sign_out">
+              <button>
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+              </button>
+            </form>
           </div>
         </div>
       </nav>
@@ -49,10 +77,9 @@
 
     <section>
       <div class="go_back">
-        <button type="submit">
-          <i class="fa-solid fa-arrow-left"></i>
-          Contract details
-        </button>
+        <!--
+          @@
+        -->
       </div>
     </section>
 
@@ -67,48 +94,40 @@
           <div class="bottom_top-Title">
             <div class="top_title">
               <span>Contract</span>
-              <img src="/images/pic-2.png" alt="" />
+              <img src="/images/pic/pic-2.png" alt="" />
             </div>
             <div class="bottom_top_container">
               <div class="info">
                 <label for="">Email</label>
-                <span>work@email</span>
+                <span><%=dataContracts[0].HSDK_EMAIL%></span>
               </div>
               <div class="info">
                 <label for="">Shop name</label>
-                <span>ACCB Food</span>
+                <span><%=dataContracts[0].HSDK_TENQUAN%></span>
               </div>
               <div class="info">
                 <label for="">Representatives</label>
-                <span>Hoang Van Cau</span>
+                <span><%=dataContracts[0].HSDK_NGUOIDAIDIEN%></span>
               </div>
               <div class="info">
                 <label for="">City</label>
-                <span>TP.HCM</span>
+                <span><%=dataContracts[0].HSDK_THANHPHO%></span>
               </div>
               <div class="info">
                 <label for="">County</label>
-                <span>VietNam</span>
+                <span><%=dataContracts[0].HSDK_QUAN%></span>
               </div>
               <div class="info">
                 <label for="">Number Of Branches</label>
-                <span>3</span>
+                <span><%=dataContracts[0].HSDK_SLCHINHANH%></span>
               </div>
               <div class="info">
                 <label for="">Number Of Orders/Day</label>
-                <span>500</span>
+                <span><%=dataContracts[0].HSDK_SLDONHANGTOITHIEU%></span>
               </div>
               <div class="info">
                 <label for="">Type Of Cuisine</label>
-                <span>Noodle</span>
-              </div>
-              <div class="info">
-                <label for="">Business Address</label>
-                <span>KTX khu B, DHQG TP.HCM</span>
-              </div>
-              <div class="info">
-                <label for="">Phone Number</label>
-                <span>0123456789</span>
+                <span><%=dataContracts[0].HSDK_LOAIAMTHUC%></span>
               </div>
               <div class="info">
                 <label for="">Operating Status</label>
@@ -129,7 +148,15 @@
           <span>Contract term:</span>
           <span>24/12/2022</span>
         </div>
-        <button class="btn_renew">Contact a partner</button>
+        <form action="/accb_food.vn/nhanvien/duyet_contract" method="post">
+          <input
+            type="hidden"
+            name="id_hsdk"
+            value="<%=dataContracts[0].HSDK_MA%>"
+          />
+          <input type="hidden" name="id_nv" value="<%=dataAgent[0].NV_MA%>" />
+          <button class="btn_renew">Contact a partner</button>
+        </form>
       </div>
     </section>
     <footer>

@@ -24,7 +24,11 @@
         <div class="left__container">
           <img src="/images/pic/signup.png" alt="" />
         </div>
-        <form action="" class="form__container">
+        <form
+          action="/accb_food.vn/doitac/sign_upPartner"
+          class="form__container"
+          method="POST"
+        >
           <div class="top_form">
             <span>Wellcome to focus</span>
             <span>Register your account</span>
@@ -33,30 +37,46 @@
           <div class="middle_form">
             <div class="item">
               <label for="">Email <label for="">*</label></label>
-              <input type="text" placeholder="Enter your email" />
+              <input type="text" placeholder="Enter your email" name="mail" />
             </div>
             <div class="item">
               <label for="">Shop name <label for="">*</label></label>
-              <input type="text" placeholder="Enter your shop name" />
+              <input
+                type="text"
+                placeholder="Enter your shop name"
+                name="shopName"
+              />
             </div>
 
             <div class="item">
               <label for="">Representatives<label for="">*</label></label>
-              <input type="text" placeholder="Enter your representatives" />
+              <input
+                type="text"
+                placeholder="Enter your representatives"
+                name="representatives"
+              />
             </div>
             <div class="item">
               <label for="">Your city<label for="">*</label></label>
-              <input type="text" placeholder="Enter your city" />
+              <input type="text" placeholder="Enter your city" name="city" />
             </div>
 
             <div class="item">
               <label for="">Your county<label for="">*</label></label>
-              <input type="text" placeholder="Enter your county" />
+              <input
+                type="text"
+                placeholder="Enter your county"
+                name="county"
+              />
             </div>
 
             <div class="item">
               <label for="">Your address<label for="">*</label></label>
-              <input type="text" placeholder="Enter your adress" />
+              <input
+                type="text"
+                placeholder="Enter your adress"
+                name="address"
+              />
             </div>
 
             <div class="item">
@@ -66,6 +86,7 @@
               <input
                 type="number"
                 placeholder="Enter your number of branches"
+                name="branchesNumber"
               />
             </div>
 
@@ -76,12 +97,17 @@
               <input
                 type="number"
                 placeholder="Enter your number Of orders per day"
+                name="NumberOrderPerDay"
               />
             </div>
 
             <div class="item">
               <label for="">Your type Of cuisine<label for="">*</label></label>
-              <input type="text" placeholder="Enter your type Of cuisine" />
+              <input
+                type="text"
+                placeholder="Enter your type Of cuisine"
+                name="cuisineType"
+              />
             </div>
 
             <div class="item">
@@ -91,17 +117,29 @@
 
             <div class="item">
               <label for="">Your phone number<label for="">*</label></label>
-              <input type="text" placeholder="Enter your phone number" />
+              <input
+                type="text"
+                placeholder="Enter your phone number"
+                name="phone"
+              />
             </div>
 
             <div class="item">
               <label for="">Your password<label for="">*</label></label>
-              <input type="password" placeholder="Enter your password" />
+              <input
+                type="password"
+                placeholder="Enter your password"
+                name="password"
+              />
             </div>
 
             <div class="item">
               <label for="">Your password<label for="">*</label></label>
-              <input type="password" placeholder="Confirm your password" />
+              <input
+                type="password"
+                placeholder="Confirm your password"
+                name="password"
+              />
             </div>
 
             <input type="submit" value="Login" class="btn_signup" />

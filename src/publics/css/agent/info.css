@@ -205,7 +205,7 @@ body {
     opacity: 0.7;
 }
 
-.bottom_left_container span {
+.bottom_left_container input {
     display: flex;
     width: 100%;
     background-color: var(--blue_white);

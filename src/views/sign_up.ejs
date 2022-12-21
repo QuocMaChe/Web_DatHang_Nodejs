@@ -1,97 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/fontawesome-free-6.2.1-web/css/all.css" />
+    <link rel="stylesheet" href="/css/resert.css" />
+    <link rel="stylesheet" href="/css/sign_up.css" />
+    <title>Sign Up</title>
+  </head>
 
-  <link rel="stylesheet" href="/fontawesome-free-6.2.1-web/css/all.css" />
-  <link rel="stylesheet" href="/css/resert.css" />
-  <link rel="stylesheet" href="/css/sign_up.css" />
-  <title>Sign Up</title>
-</head>
+  <body>
+    <section>
+      <nav class="navbar">
+        <button type="submit">
+          <i class="fa-solid fa-arrow-left"></i>
+          Sign Up
+        </button>
+        <img src="/images/pic/logo.png" alt="This is logo" />
+      </nav>
 
-<body>
-  <section>
-    <nav class="navbar">
-      <button type="submit">
-        <i class="fa-solid fa-arrow-left"></i>
-        Sign Up
-      </button>
-      <img src="/images/pic/logo.png" alt="This is logo" />
-    </nav>
+      <div class="container">
+        <div class="left__container">
+          <img src="/images/pic/signup.png" alt="" />
+        </div>
+        <form action="/sign_upUser" class="form__container" method="POST">
+          <div class="top_form">
+            <span>Wellcome to focus</span>
+            <span>Register your account</span>
+          </div>
 
-    <div class="container">
-      <div class="left__container">
-        <img src="/images/pic/signup.png" alt="" />
+          <div class="middle_form">
+            <div class="item">
+              <label for="">Your name <label for="">*</label></label>
+              <input type="text" placeholder="Enter your name" name="name" />
+            </div>
+
+            <div class="gelder">
+              <input type="radio" id="male" name="userSex" value="Nam" />
+              <label for="Nam">Male</label><br />
+              <input type="radio" id="Femal" name="userSex" value="Nu" />
+              <label for="Nu">Femal</label><br />
+            </div>
+
+            <div class="item">
+              <label for="">Your email<label for="">*</label></label>
+              <input
+                type="email"
+                placeholder="Enter your email"
+                name="userEmail"
+              />
+            </div>
+
+            <div class="item">
+              <label for="">Your phone number<label for="">*</label></label>
+              <input
+                type="text"
+                placeholder="Enter your phone number"
+                name="userPhoneNumber"
+              />
+            </div>
+
+            <div class="item">
+              <label for="">tỉnh<label for="">*</label></label>
+              <select
+                name="DC_MATINH"
+                id="DC_TENTINH"
+                aria-label=".form-select-sm example"
+              >
+                <option value="">chọn tỉnh</option>
+                <% for(var count=0; count < dataConscious.length; count++) { %>
+                <option value="<%= dataConscious[count].DC_MATINH%>">
+                  <%= dataConscious[count].DC_TENTINH%>
+                </option>
+                <% }%>
+              </select>
+            </div>
+
+            <div class="item">
+              <label for="">huyện<label for="">*</label></label>
+              <select
+                name="DC_MAHUYEN"
+                id="DC_TENHUYEN"
+                aria-label=".form-select-sm example"
+              >
+                <option value="">chọn huyện</option>
+                <% for(var count=0; count < dataConscious.length; count++) { %>
+                <option value="<%= dataConscious[count].DC_MAHUYEN%>">
+                  <%= dataConscious[count].DC_TENHUYEN%>
+                </option>
+                <% }%>
+              </select>
+            </div>
+
+            <div class="item">
+              <label for="">xẫ<label for="">*</label></label>
+              <select
+                name="DC_MAXA"
+                id="DC_TENXA"
+                aria-label=".form-select-sm example"
+              >
+                <option value="">chọn xã</option>
+                <% for(var count=0; count < dataConscious.length; count++) { %>
+                <option value="<%= dataConscious[count].DC_MAXA%>">
+                  <%= dataConscious[count].DC_TENXA%>
+                </option>
+                <% }%>
+              </select>
+            </div>
+
+            <div class="item">
+              <label for="">Your address number<label for="">*</label></label>
+              <input
+                type="text"
+                placeholder="Enter your adress number"
+                name="userAddress"
+              />
+            </div>
+
+            <div class="item">
+              <label for="">Your user name<label for="">*</label></label>
+              <input
+                type="text"
+                placeholder="Enter your user name"
+                name="userName"
+              />
+            </div>
+
+            <div class="item">
+              <label for="">Your password<label for="">*</label></label>
+              <input
+                type="password"
+                placeholder="Enter your password"
+                name="userPassword"
+              />
+            </div>
+
+            <div class="item">
+              <label for="">Your password<label for="">*</label></label>
+              <input type="password" placeholder="Confirm your password" />
+            </div>
+
+            <input type="submit" value="Login" class="btn_signup" />
+          </div>
+          <div class="bottom_form">
+            <span>Or login with</span>
+            <div class="icon_form">
+              <i class="fa-brands fa-facebook"></i>
+              <i class="fa-brands fa-google"></i>
+              <i class="fa-brands fa-instagram"></i>
+            </div>
+          </div>
+        </form>
       </div>
-      <form action="/sign_up1" class="form__container" method="POST">
-        <div class="top_form">
-          <span>Wellcome to focus</span>
-          <span>Register your account</span>
-        </div>
+    </section>
 
-        <div class="middle_form">
-          <div class="item">
-            <label for="">Your name <label for="">*</label></label>
-            <input type="text" placeholder="Enter your name" />
-          </div>
-
-          <div class="gelder">
-            <input type="radio" id="male" name="sex" value="Nam" />
-            <label for="Nam">Male</label><br />
-            <input type="radio" id="Femal" name="sex" value="Nu" />
-            <label for="Nu">Femal</label><br />
-          </div>
-
-          <div class="item">
-            <label for="">Your email<label for="">*</label></label>
-            <input type="email" placeholder="Enter your email" name="email" />
-          </div>
-
-          <div class="item">
-            <label for="">Your phone number<label for="">*</label></label>
-            <input type="text" placeholder="Enter your phone number" name="phone_number" />
-          </div>
-
-          <div class="item">
-            <label for="">Your address<label for="">*</label></label>
-            <input type="text" placeholder="Enter your adress" name="address" />
-          </div>
-
-          <div class="item">
-            <label for="">Your user name<label for="">*</label></label>
-            <input type="text" placeholder="Enter your user name" name="username" />
-          </div>
-
-          <div class="item">
-            <label for="">Your password<label for="">*</label></label>
-            <input type="password" placeholder="Enter your password" name="password" />
-          </div>
-
-          <div class="item">
-            <label for="">Your password<label for="">*</label></label>
-            <input type="password" placeholder="Confirm your password" />
-          </div>
-
-          <input type="submit" value="Login" class="btn_signup" />
-        </div>
-        <div class="bottom_form">
-          <span>Or login with</span>
-          <div class="icon_form">
-            <i class="fa-brands fa-facebook"></i>
-            <i class="fa-brands fa-google"></i>
-            <i class="fa-brands fa-instagram"></i>
-          </div>
-        </div>
-      </form>
-    </div>
-  </section>
-
-  <footer>
-    <span>Copyright © 2022 ACCB Food Inc.</span>
-  </footer>
-</body>
-
+    <footer>
+      <span>Copyright © 2022 ACCB Food Inc.</span>
+    </footer>
+  </body>
 </html>

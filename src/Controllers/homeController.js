@@ -1,6 +1,7 @@
 import pool from "../configs/connectDB";
 import multer from 'multer';
 import session from "express-session";
+import { response } from "express";
 //User============================================================================================================================================================================================
 let getHomepage = async (req, res) => {
     let data_foods = [];
@@ -43,8 +44,12 @@ let getSignIn = (req, res) => {
     return res.render('sign_in.ejs')
 }
 //
-let getSignUp = (req, res) => {
-    return res.render('sign_up.ejs')
+let getSignUp = async (req, res) => {
+    await pool.connect();
+    let data_conscious = [];
+    let conscious = await pool.request().query('select *  from DIACHI ');
+    data_conscious = conscious.recordset;
+    return res.render('sign_up.ejs', { dataConscious: data_conscious });
 }
 //
 let getHomepageUser = async (req, res) => {
@@ -182,8 +187,6 @@ let getProfilepage = async (req, res) => {
     }
 }
 //
-const upload = multer().single('profile_pic');
-
 let processUploadFile = async (req, res) => {
     // 'profile_pic' is the name of our file input field in the HTML form
     upload(req, res, function (err) {
@@ -199,7 +202,8 @@ let processUploadFile = async (req, res) => {
             return res.send(err);
         }
         // Display uploaded image for user validation
-        res.send(`You have uploaded this image: <hr/><img src="/images/profile pic/${req.file.filename}" width="500"><hr />`);
+        req.session.file=file;
+        return res.redirect('/accb_food.vn/doitac/add_food');
     });
 }
 //
@@ -241,46 +245,68 @@ let getCartpage = async (req, res) => {
     }
 }
 //
-let getFoodDetailpage = (req, res) => {
-    return res.render('fooddetail.ejs');
+let getFoodDetailpage = async (req, res) => {
+    if(req.session.user && req.params){
+        let id=req.params.id;
+        try{
+            let data_food=[];
+            let data_menu=[];
+            await pool.connect();
+            let food=await pool.request().query(`select * from MONAN where MAN_MA='${id}'`)
+            data_food=food.recordset;
+            let menu=await pool.request().query(`select * from THUCDON where TD_MA='${data_food[0].TD_MA}'`);
+            data_menu=menu.recordset;
+            return res.render('fooddetail.ejs',{
+                dataFood: data_food,
+                dataMenu: data_menu
+            });
+        }catch(err){
+            return res.redirect('/accb_food.vn')
+        }
+        finally{
+            pool.close();
+        }
+    }
+    else{
+        return res.redirect('/accb_food.vn')
+    }
 }
 //
 let getOrderpage = async (req, res) => {
-    if(req.session.user){
-        let data_orders=[];
+    if (req.session.user) {
+        let data_orders = [];
         await pool.connect();
         let orders = await pool.request().query(`exec sp_XemDanhSachDonHangCuaKhachHang '${req.session.user[0].KH_MA}'`);
-        data_orders=orders.recordset;
-        return res.render('orders.ejs',{
-            dataOrders:data_orders
+        data_orders = orders.recordset;
+        return res.render('orders.ejs', {
+            dataOrders: data_orders
         });
     }
-    else{
+    else {
         return res.redirect('/accb_food.vn/cart')
     }
 }
 //
-
 let getProcessOrderpage = async (req, res) => {
-    if(req.body && req.session.user){
-        let { pay} = req.body;
+    if (req.body && req.session.user) {
+        let { pay } = req.body;
         await pool.connect();
         await pool.request().query(`exec SP_KHDATHANG '${req.session.user[0].KH_MA}',N'${pay}'`);
         return res.redirect('/accb_food.vn/order');
     }
-    else{
+    else {
         return res.redirect('/accb_food.vn/cart')
     }
 }
 //
 let getProcessCancelOrderpage = async (req, res) => {
-    if(req.body && req.session.user){
+    if (req.body && req.session.user) {
         let id = req.params.id;
         await pool.connect();
         await pool.request().query(`UPDATE DONHANG SET DH_TINHTRANG = N'Đã hủy' WHERE DH_MA = '${id}'`);
         return res.redirect('/accb_food.vn/order');
     }
-    else{
+    else {
         return res.redirect('/accb_food.vn/cart')
     }
 }
@@ -290,7 +316,7 @@ let getAddtoCart = async (req, res) => {
         let data_foods = []
         try {
             await pool.connect();
-            let food=await pool.request().query(`select * from MONAN where MAN_MA=${req.params.id}`);
+            let food = await pool.request().query(`select * from MONAN where MAN_MA=${req.params.id}`);
             // Them vao gio hang
             let count = await pool.request().query(`select count(*) as count from GIOHANG`);
             if (count.recordset[0].count == 0) {
@@ -372,6 +398,30 @@ let updateQuantity = async (req, res) => {
         return res.redirect('/accb_food.vn');
     }
 }
+
+let createNewUser = async (req, res) => {
+   try{
+    await pool.connect();
+    let name = req.body.name;
+    let sex = req.body.userSex;
+    let email = req.body.userEmail;
+    let phone = req.body.userPhoneNumber;
+    let MATINH = req.body.DC_MATINH.trim();
+    let MAHUYEN = req.body.DC_MAHUYEN.trim();
+    let MAXA = req.body.DC_MAXA.trim();
+    let SONHA = req.body.userAddress;
+    let userName = req.body.userName;
+    let userPass = req.body.userPassword;
+    await pool.request().query(`exec sp_ThemThongTinKhachHang N'${name}','${phone}','${email}',N'${sex}','${MATINH}','${MAHUYEN}','${MAXA}','${SONHA}'`);
+    await pool.request().query(`exec pr_taoUSER '${userName}','${userPass}','KHACHHANG'`);
+    return res.redirect('/sign_in');
+   }catch(err){
+    return res.redirect('/sign_up');
+   }
+   finally {
+    pool.close();
+    }
+}
 //Partner=========================================================================================================================================================================================
 let getHomepageDoitac = async (req, res) => {
     if (req.session.partner) {
@@ -383,17 +433,13 @@ let getHomepageDoitac = async (req, res) => {
             // Store
             let stores = await pool.request().query(`exec sp_dscuahangdoitac '${req.session.partner[0].DT_MA}'`);
             data_stores = stores.recordset;
+            req.session.store=data_stores
             // Branch
-            for(let i=0; i<data_stores.length;i++){
-                let branch = await pool.request().query(`exec sp_chinhanhcuahangdoitac '${req.session.partner[0].DT_MA}','${data_stores[i].CH_MA}'`);
-                data_branchs.push(branch.recordset[0]);
-            }
+            let branch = await pool.request().query(`exec sp_chinhanhcuadoitac '${req.session.partner[0].DT_MA}','${data_stores[0].CH_MA}'`);
+            data_branchs=branch.recordset;
             // Food
-            for(let i=0; i<data_stores.length;i++){
-                let foods = await pool.request().query(`exec sp_monancuacuahangdoitac '${req.session.partner[0].DT_MA}','${data_stores[i].CH_MA}'`)
-                data_foods.push(foods.recordset[0]);
-            }
-
+            let foods = await pool.request().query(`exec sp_monancuacuahang '${req.session.partner[0].DT_MA}','${data_stores[0].CH_MA}'`)
+            data_foods=foods.recordset;
             //
             return res.render('./partner/Home.ejs', {
                 dataPartner: req.session.partner,
@@ -415,19 +461,97 @@ let getHomepageDoitac = async (req, res) => {
 }
 //
 let getSignUpDT = async (req, res) => {
-    return res.render('./partner/sign_up.ejs');
+    return res.render('./partner/signup.ejs');
 }
 //
 let getMenupageDT = async (req, res) => {
-    return res.render('./partner/Menu.ejs');
+    if(req.session.partner&&req.session.store){
+        let foods_of_store=[];
+        await pool.connect();
+        let foods=await pool.request().query(`exec sp_monancuacuahang '${req.session.partner[0].DT_MA}','${req.session.store[0].CH_MA}'`);
+        foods_of_store=foods.recordset;
+
+        return res.render('./partner/Menu.ejs',{
+            dataFoodsofStore:foods_of_store
+        });
+    }
+    else{
+        return res.redirect('/accb_food.vn/doitac');
+    }
 }
 //
 let getAddFoodDT = async (req, res) => {
-    return res.render('./partner/AddFood.ejs');
+    await pool.connect();
+    let data_menu=[];
+    let menu=await pool.request().query(`select * from THUCDON where CH_MA='${req.session.store[0].CH_MA}' and CN_MA='${req.params.id}'`);
+    data_menu=menu.recordset;
+    return res.render('./partner/AddFood.ejs',{
+        idBranch:req.params.id,
+        dataMenus: data_menu
+    });
+}
+//
+const upload = multer().single('food_pic');
+
+let getProcessAddFoodDT = async (req, res) => {
+    if(req.session.partner && req.session.store && req.params.id && req.body ){
+        let food_name=req.body.name;
+        let food_detail=req.body.detail;
+        let food_price=req.body.cost;
+        let id_menu=req.body.menu;
+        let name_menu=req.body.name_menu ?? ''
+
+        // 'profile_pic' is the name of our file input field in the HTML form
+        upload(req, res,async function (err) {
+            // req.file contains information of uploaded file
+            // req.body contains information of text fields, if there were any
+            if (req.fileValidationError) {
+                return res.send(req.fileValidationError);
+            }
+            else if (!req.file) {
+                return res.send('Please select an image to upload');
+            }
+            else if (err instanceof multer.MulterError) {
+                return res.send(err);
+            }
+            let image_path='/images/foods/'+req.file.filename;
+            await pool.connect();
+            if(name_menu ){
+                await pool.request().query(`exec sp_themThucDon '${req.params.id}','${req.session.store[0].CH_MA}', '${name_menu}'`);
+                let menu=await pool.request().query(`select * from THUCDON where CH_MA='${req.session.store[0].CH_MA}' and CN_MA='${req.params.id}' and TD_TEN='${name_menu}'`);
+                await pool.request().query(`exec sp_themMonAn '${req.session.partner[0].DT_MA}','${menu.recordset[0].TD_MA}' ,'${req.params.id}','${req.session.store[0].CH_MA}' ,'${food_name}' ,'${food_detail}' ,'${image_path}','${food_price}'`);
+            }else{
+                await pool.request().query(`exec sp_themMonAn '${req.session.partner[0].DT_MA}','${id_menu}' ,'${req.params.id}','${req.session.store[0].CH_MA}' ,'${food_name}' ,'${food_detail}' ,'${image_path}','${food_price}'`);
+            }
+            
+            return res.redirect(`/accb_food.vn/doitac/add_food/id/${req.params.id}`);
+        });
+
+    }
+    else{
+        return res.redirect('/');
+    }
 }
 //
 let getBranchpageDT = async (req, res) => {
-    return res.render('./partner/Branch.ejs');
+    if(req.session.partner && req.session.store && req.params.id){
+        let foods_of_branch=[];
+        let data_branch=[];
+        await pool.connect();
+        let foods=await pool.request().query(`exec sp_monanchinhanhcuahang '${req.session.partner[0].DT_MA}','${req.session.store[0].CH_MA}','${req.params.id}'`);
+        foods_of_branch=foods.recordset;
+        //
+        let branch=await pool.request().query(`select * from CHINHANH where CN_MA='${req.params.id}'`);
+        data_branch=branch.recordset;
+
+        return res.render('./partner/Branch.ejs',{
+            dataFoodsofBranch:foods_of_branch,
+            dataBranch:data_branch
+        });
+    }
+    else{
+        return res.redirect('/');
+    }
 }
 //
 let getContractDetailpageDT = async (req, res) => {
@@ -439,11 +563,51 @@ let getFoodDetailpageDT = async (req, res) => {
 }
 //
 let getOrderspageDT = async (req, res) => {
-    return res.render('./partner/orders.ejs');
+    if(req.session.partner){
+        let orders=[];
+        await pool.connect();
+        let order = await pool.request().query(`select * from DONHANG where CH_MA='${req.session.store[0].CH_MA}'`);
+        orders=order.recordset;
+        return res.render('./partner/orders.ejs',{
+            dataOrders: orders
+        });
+    }else{
+        return res.redirect('/');
+    }
+}
+//
+let getProcessCancelOrderpageDT = async (req, res) => {
+    if (req.params && req.session.partner) {
+        let id = req.params.id;
+        await pool.connect();
+        await pool.request().query(`UPDATE DONHANG SET DH_TINHTRANG = N'Đã hủy' WHERE DH_MA = '${id}'`);
+        return res.redirect('/accb_food.vn/doitac/orders');
+    }
+    else {
+        return res.redirect('/accb_food.vn/doitac');
+    }
+}
+//
+let getDeletFoodBranchpageDT= async (req, res) => {
+    if (req.params.id_mn && req.session.partner) {
+        let id_cn = req.body.MA_CN;
+        let id_mn = req.params.id_mn;
+
+        try{
+            await pool.connect();
+            await pool.request().query(`exec sp_xoamonan '${id_mn}', '${id_cn}', '${req.session.store[0].CH_MA}'`);
+            return res.redirect(`/accb_food.vn/doitac/branch/id/${id_cn}`);
+        }catch(err){
+            return res.redirect('/accb_food.vn/doitac');
+        }
+    }
+    else {
+        return res.redirect('/accb_food.vn/doitac');
+    }
 }
 //
 let getOrdersDetailpageDT = async (req, res) => {
-    return res.render('./partner/OrsersDetails.ejs');
+    return res.render('./partner/OrdersDetails.ejs');
 }
 //
 let getPartContractspageDT = async (req, res) => {
@@ -455,21 +619,56 @@ let getRenewContractpageDT = async (req, res) => {
 }
 //
 let getShoppageDT = async (req, res) => {
-    return res.render('./partner/shop.ejs');
+    if(req.session.partner){
+        await pool.connect();
+        let store = await pool.request().query(`select * from CUAHANG where DT_MA='${req.session.partner[0].DT_MA}' and CH_MA='${req.session.store[0].CH_MA}'`);
+        req.session.store=store.recordset;
+        return res.render('./partner/shop.ejs',{
+            dataStore: req.session.store
+        });
+    }else{
+        return res.redirect('/');
+    }
+}
+//
+let getEditShoppageDT = async (req, res) => {
+    if(req.session.partner){
+        await pool.connect();
+        await pool.request().query(`exec sp_updateCuaHang '${req.session.partner[0].DT_MA}','${req.session.store[0].CH_MA}','${req.body.name}','${req.body.number_phone}',N'${req.body.tinhtrang}'`);
+        return res.redirect('/accb_food.vn/doitac/shop');
+    }else{
+        return res.redirect('/');
+    } 
+}
+//
+let createrNewPartner = async (req, res) => {
+    await pool.connect();
+    let mail = req.body.mail;
+    let shopname = req.body.shopName;
+    let representatives = req.body.representatives;
+    let city = req.body.city;
+    let county = req.body.county;
+    let branchesNumber = req.body.branchesNumber;
+    let NumberOrderPerDay = req.body.NumberOrderPerDay;
+    let cuisineType = req.body.cuisineType;
+    let phone = req.body.phone;
+    let password = req.body.password;
+    let address=req.body.address;
+    await pool.request().query(`exec sp_themHoSoDangKy '${mail}',N'${shopname}',N'${city}',N'${county}',${branchesNumber},${NumberOrderPerDay},N'${cuisineType}',N'${representatives}','${phone}','${password[0]}','${address}'`)
+    return res.redirect('/accb_food.vn/doitac')
 }
 //Driver==========================================================================================================================================================================================
 let getHomepageDriver = async (req, res) => {
     if (req.session.driver) {
-        let data_orderforms_situation = [];
+        let data_orders = [];
         try {
             await pool.connect();
-            // Order form situation
-            let order_forms_situation = await pool.request().query('select * from TINHTRANGGIAOHANG')
-            data_orderforms_situation = order_forms_situation.recordset;
+            let orders= await pool.request().query('select * from DONHANG')
+            data_orders = orders.recordset;
 
-            return res.render('driver.ejs', {
+            return res.render('./driver/orders.ejs', {
                 dataDriver: req.session.driver,
-                dataOrderFormSituation: data_orderforms_situation
+                dataOrders: data_orders
             });
         }
         catch (err) {
@@ -485,11 +684,75 @@ let getHomepageDriver = async (req, res) => {
 }
 //
 let getProfilepageDriver = async (req, res) => {
-    return res.render('./driver/info.ejs');
+    if (req.session.driver) {
+        try {
+            return res.render('./driver/info.ejs', {
+                dataDriver: req.session.driver
+            });
+        }
+        catch (err) {
+            console.log("ERROR:", err)
+        }
+        finally {
+            pool.close();
+        }
+    }
+    else {
+        return res.redirect('/')
+    }
 }
 //
-let getOrderspageDriver = async (req, res) => {
-    return res.render('./driver/orders.ejs');
+let getEditProfileDriver = async (req, res) => {
+    if (req.session.driver && req.body) {
+        try {
+            await pool.connect();
+
+            
+            await pool.request().query(`update TAIXE set TX_TEN=N'${req.body.name}', TX_CMND='${req.body.cmnd}', TX_SDT='${req.body.sdt}', TX_BIENSOXE='${req.body.bike_number}', TX_STK='${req.body.bank_number}', TX_GIOITINH='${req.body.sex}' WHERE TX_MA ='${req.session.driver[0].TX_MA}'`)
+
+            let driver = await pool.request().query(`select * from TAIXE where TX_MA='${req.session.driver[0].TX_MA}'`)
+            req.session.driver=driver.recordset;
+            return res.render('./driver/info.ejs', {
+                dataDriver: req.session.driver
+            });
+        }
+        catch (err) {
+            console.log("ERROR:", err)
+        }
+        finally {
+            pool.close();
+        }
+    }
+    else {
+        return res.redirect('/')
+    }
+}
+//
+let getAcceptOrderspageDriver = async (req, res) => {
+    if (req.session.driver && req.params) {
+        let data_order = [];
+        let id_dh=req.body.id_dh;
+        let id_tx=req.params.id;
+        try {
+            await pool.connect();
+
+            let order= await pool.request().query(`select * from DONHANG where DH_MA='${id_dh}'`)
+            data_order = order.recordset;
+
+            await pool.request().query(`exec sp_acceptOrder '${id_tx}','${data_order[0].DH_MA}',N'Đã nhận đơn hàng','${data_order[0].DC_MATINH}','${data_order[0].DC_MAHUYEN}','${data_order[0].DC_MAXA}'`)
+
+            return res.redirect('/accb_food.vn/taixe');
+        }
+        catch (err) {
+            console.log("ERROR:", err)
+        }
+        finally {
+            pool.close();
+        }
+    }
+    else {
+        return res.redirect('/')
+    }
 }
 //
 let getOrdersDetailpageDriver = async (req, res) => {
@@ -497,34 +760,93 @@ let getOrdersDetailpageDriver = async (req, res) => {
 }
 //
 let getSignUppageDriver = async (req, res) => {
-    return res.render('./driver/signup.ejs');
+    await pool.connect();
+    let data_conscious = [];
+    let conscious = await pool.request().query('select *  from DIACHI ');
+    data_conscious = conscious.recordset;
+    return res.render('./driver/signup.ejs', { dataConscious: data_conscious });
 }
 //
 let getWalletpageDriver = async (req, res) => {
-    return res.render('./driver/Wallet.ejs');
-}
-//Agent===========================================================================================================================================================================================
-let getHomepageNhanvien = async (req, res) => {
-    if (req.session.agent) {
-        let data_contracts = [];
-        let data_regforms = [];
+    if (req.session.driver) {
         try {
-            await pool.connect();
-            // Contracts
-            let contracts = await pool.request().query('select * from HOPDONG')
-            data_contracts = contracts.recordset;
-            // Registration forms
-            let registration_forms = await pool.request().query('select * from HOSODANGKY')
-            data_regforms = registration_forms.recordset;
+            let data_orderforms_situation=[];
+            let data_orders=[]; 
 
-            return res.render('agent.ejs', {
-                dataAgent: req.session.agent,
-                dataContracts: data_contracts,
-                dataRegForms: data_regforms
+            await pool.connect();
+            let order_forms_situation= await pool.request().query(`select * from TINHTRANGGIAOHANG where TX_MA='${req.session.driver[0].TX_MA}'`)
+            data_orderforms_situation = order_forms_situation.recordset;
+
+            for(let i=0; i<data_orderforms_situation.length;i++){
+                let orders= await pool.request().query(`select * from DONHANG where DH_MA='${data_orderforms_situation[0].DH_MA}'`)
+                data_orders.push(orders.recordset[0]) ;
+            }
+
+            let cost =0 ;
+            for(let i=0; i<data_orders.length ;i++){
+                cost+=data_orders[0].DH_PHIVANCHUYEN;
+            }
+            return res.render('./driver/Wallet.ejs', {
+                dataDriver: req.session.driver,
+                dataOrders: data_orders,
+                cost:cost
             });
         }
         catch (err) {
             console.log("ERROR:", err)
+        }
+        finally {
+            pool.close();
+        }
+    }
+    else {
+        return res.redirect('/')
+    }
+}
+//
+let createrNewDriver = async (req, res) => {
+    try{
+        await pool.connect();
+        let name = req.body.name;
+        let sex = req.body.sex;
+        let email = req.body.email;
+        let phone = req.body.phone;
+        let MATINH = req.body.DC_MATINH.trim();
+        let MAHUYEN = req.body.DC_MAHUYEN.trim();
+        let MAXA = req.body.DC_MAXA.trim();
+        let id = req.body.id;
+        let licenseplate = req.body.licensePlate;
+        let bank = req.body.bank;
+        let banknumber = req.body.bankNumber;
+        let userName = req.body.userName;
+        let userPass = req.body.pass;
+        console.log(`exec sp_themthongtintaixe N'${name}','${id}','${phone}',N'${licenseplate}','${banknumber}','${bank}','${sex}','${MATINH}','${MAHUYEN}','${MAXA}'`);
+        console.log(`exec pr_taoUSER '${userName}','${userPass}','TAIXE'`);
+        await pool.request().query(`exec sp_themthongtintaixe N'${name}','${id}','${phone}',N'${licenseplate}','${banknumber}','${bank}','${sex}','${MATINH}','${MAHUYEN}','${MAXA}'`);
+        await pool.request().query(`exec pr_taoUSER '${userName}','${userPass}','TAIXE'`);
+        return res.redirect('/sign_in');
+    }catch(err){
+        return res.redirect('/');
+    }finally{
+        return res.redirect('/sign_in');
+    }
+}
+//Agent===========================================================================================================================================================================================
+let getEmployeeContractpageNhanvien = async (req, res) => {
+    if (req.session.agent) {
+        let data_contracts = [];
+        try {
+            await pool.connect();
+            // Contracts
+            let contracts = await pool.request().query('select * from HOSODANGKY where NV_MA=NULL')
+            data_contracts = contracts.recordset;
+            return res.render('./agent/EmployeeContact.ejs', {
+                dataAgent: req.session.agent,
+                dataContracts: data_contracts
+            });
+        }
+        catch (err) {
+            return res.redirect('/accb_food.vn/nhanvien/');
         }
         finally {
             pool.close();
@@ -536,23 +858,111 @@ let getHomepageNhanvien = async (req, res) => {
 }
 //
 let getContractDetailpageNhanvien = async (req, res) => {
-    return res.render('./agent/ContracDetails.ejs');
-}
-//
-let getEmployeeContractpageNhanvien = async (req, res) => {
-    return res.render('./agent/EmployeeContact.ejs');
+    if (req.session.agent) {
+        let data_contracts = [];
+        let id=req.params.id;
+        try {
+            await pool.connect();
+            // Contracts
+            let contracts = await pool.request().query(`select * from HOSODANGKY where HSDK_MA='${id}'`)
+            data_contracts = contracts.recordset;
+            return res.render('./agent/ContractDetails.ejs', {
+                dataAgent: req.session.agent,
+                dataContracts: data_contracts
+            });
+        }
+        catch (err) {
+            return res.redirect('/accb_food.vn/nhanvien/');
+        }
+        finally {
+            pool.close();
+        }
+    }
+    else {
+        return res.redirect('/');
+    }
 }
 //
 let getEmployeePartnerpageNhanvien = async (req, res) => {
-    return res.render('./agent/EmployeePartner.ejs');
+    if(req.session.agent){
+        try{
+            let data_partners=[];
+            await pool.connect();
+            let partners = await pool.request().query(`select * from DOITAC`);
+            data_partners=partners.recordset;
+            return res.render('./agent/EmployeePartner.ejs',{
+                dataAgent: req.session.agent,
+                dataPartners: data_partners
+            });
+        }catch(err){
+            return res.redirect('/accb_food.vn/nhanvien');
+        }
+        finally{
+            pool.close();
+        }
+    }
+    else{
+        return res.redirect('/accb_food.vn/nhanvien');
+    }
 }
 //
 let getProfilepageNhanvien = async (req, res) => {
-    return res.render('./agent/info.ejs');
+    if(req.session.agent){
+        return res.render('./agent/info.ejs',{
+            dataAgent: req.session.agent
+        });
+    }else{
+        return res.redirect('/accb_food.vn/nhanvien');
+    }
+}
+//
+let getEditProfilepageNhanvien = async (req, res) => {
+    if(req.session.agent && req.body){
+        let name=req.body.name;
+        let mail=req.body.mail;
+        let sex=req.body.sex;
+        let cmnd=req.body.cmnd;
+        let phone_number=req.body.phone_number;
+        console.log(req.body);
+        try{
+            await pool.connect();
+            await pool.request().query(`exec sp_CapNhatThongTinNhanVien '${req.session.agent[0].NV_MA}',N'${name}','${mail}','${sex}','${cmnd}','${phone_number}'`);
+            let agent=await pool.request().query(`select * from NHANVIEN where NV_MA='${req.session.agent[0].NV_MA}'`);
+            req.session.agent=agent.recordset;
+
+            return res.redirect('/accb_food.vn/nhanvien/profile');
+        }
+        catch(err){
+            return res.redirect('/accb_food.vn/nhanvien/profile');
+        }finally{
+            pool.close();
+        }
+    }else{
+        return res.redirect('/accb_food.vn/nhanvien');
+    }
 }
 //
 let getNotifypageNhanvien = async (req, res) => {
     return res.render('./agent/Notify.ejs');
+}
+//
+let getAcceptContractNhanvien = async (req, res) => {
+    if(req.body && req.session.agent){
+        let id_hsdk=req.body.id_hsdk;
+        let id_nv=req.body.id_nv
+        try{
+            await pool.connect();
+            await pool.request().query(`exec sp_duyetHSDK '${id_hsdk}','${id_nv}'`);
+            return res.redirect(`/accb_food.vn/nhanvien/`);
+        }catch(err){
+            return res.redirect(`/accb_food.vn/nhanvien/contract_detail/id/'${id_hsdk}'`);
+        }finally{
+            pool.close();
+        }
+    }
+    else{
+        return res.redirect('/accb_food.vn/nhanvien/');
+    }
 }
 //Admin===========================================================================================================================================================================================
 let getHomepageAdmin = async (req, res) => {
@@ -631,16 +1041,6 @@ let getPartnerspageAdmin = async (req, res) => {
 let getUserProfilepageAdmin = async (req, res) => {
     return res.render('./admin/UserInfo.ejs');
 }
-//Test============================================================================================================================================================================================
-let createSign_up = (req, res) => {
-    console.log("check req : ", req.body)
-    return res.send('call post create new user')
-}
-//
-let getTest = (req, res) => {
-    return res.render('./partner/Home.ejs');
-}
-
 //
 module.exports = {
     getHomepage,
@@ -648,7 +1048,6 @@ module.exports = {
     getHomepageUser,
     getHomepageAdmin,
     getHomepageDoitac,
-    getHomepageNhanvien,
     getHomepageDriver,
     processSignIn,
     processSignOut,
@@ -674,7 +1073,7 @@ module.exports = {
     getRenewContractpageDT,
     getShoppageDT,
     getProfilepageDriver,
-    getOrderspageDriver,
+    getAcceptOrderspageDriver,
     getOrdersDetailpageDriver,
     getSignUppageDriver,
     getWalletpageDriver,
@@ -692,6 +1091,14 @@ module.exports = {
     getListLockpageAdmin,
     getPartnerspageAdmin,
     getUserProfilepageAdmin,
-    createSign_up,
-    getTest
+    createNewUser,
+    getProcessAddFoodDT,
+    getEditShoppageDT,
+    getProcessCancelOrderpageDT,
+    getDeletFoodBranchpageDT,
+    getEditProfileDriver,
+    createrNewPartner,
+    createrNewDriver,
+    getEditProfilepageNhanvien,
+    getAcceptContractNhanvien
 }

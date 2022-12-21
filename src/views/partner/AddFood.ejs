@@ -14,92 +14,121 @@
 <body>
     <section>
         <nav class="Navbar">
-            <img id="logo" src="/images/LOGO.png" alt="this is logo">
-            <ul class="Navbar-Directory">
-                <li class="Navbar-Directory-item">Home</li>
-                <li class="Navbar-Directory-item">Shop</li>
-                <li class="Navbar-Directory-item">Branch</li>
-                <li class="Navbar-Directory-item">Order</li>
-                <li class="Navbar-Directory-item">Contract</li>
-                <li class="Navbar-Directory-item">About us</li>
-            </ul>
-            <div class="Navbar-Search">
-                <input class="Navbar-Search-input" type="search" placeholder="Search">
-                <button class="Navbar-Search-btn">
-                    <span>
-                        <i class="fa-solid fa-search"></i>
-                    </span>
-                </button>
-            </div>
-
+          <img id="logo" src="/images/pic/logo.png" alt="this is logo" />
+          <ul class="Navbar-Directory">
+  
+            <li class="Navbar-Directory-item">
+              <a href="/accb_food.vn/doitac" id="GFG">Home</a>
+            </li>
+  
+            <li class="Navbar-Directory-item">
+              <a href="/accb_food.vn/doitac/shop" id="GFG">Shop</a>
+            </li>
+            
+            <li class="Navbar-Directory-item">
+              <a href="/accb_food.vn/doitac/orders" id="GFG">Order</a>
+            </li>
+  
+            <!--
+          <li class="Navbar-Directory-item">
+            <a href="/accb_food.vn/doitac/part_contracts" id="GFG">Contract</a>
+          </li>
+          -->
+            
+            <li class="Navbar-Directory-item">About us</li>
+          </ul>
+          <div class="Navbar-Search">
+            <input
+              class="Navbar-Search-input"
+              type="search"
+              placeholder="Search"
+            />
+            <button class="Navbar-Search-btn">
+              <span>
+                <i class="fa-solid fa-search"></i>
+              </span>
+            </button>
+          </div>
+  
             <div class="Nav-Subnav">
-                <div class="Nav-Subnav-account">
-                    <i class="fa-regular fa-user"></i>
-                </div>
+              <div class="Nav-Subnav-account">
+                <form action="/process_sign_out">
+                  <button>
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                  </button>
+                </form>
+              </div>
             </div>
         </nav>
-    </section>
+      </section>
 
     <div class="go_back">
-        <button type="submit">
-            <i class="fa-solid fa-arrow-left"></i>
-            Food details
-        </button>
+        <form action="/accb_food.vn/doitac/branch/id/<%=idBranch%>">
+            <button type="submit">
+                <i class="fa-solid fa-arrow-left"></i>
+                Branch
+            </button>
+        </form>
     </div>
 
     <section>
-        <div class="container">
-            <div class="top">
-                <span>Food Details</span>
-            </div>
-            <div class="food_details">
-                <div class="left_food_details">
-                    <input type="file">
+        <form method="POST" action="/accb_food.vn/doitac/process_add_food/id/<%=idBranch%>" enctype="multipart/form-data">
+            <div class="container">
+                <div class="top">
+                    <span>Food Details</span>
                 </div>
-                <div class="right_food_details">
-                    <form action="">
+                <div class="food_details">
+                    <div class="left_food_details">
+                        <input type="file" name="food_pic">
+                    </div>
+                    
+                    <div class="right_food_details">
+                        
                         <div class="top_right_food_details">
-                            <div class="name_partner">
-                                <span>Partner: </span>
-                                <input type="text"></input>
-                            </div>
-                            <div class="name_menu">
-                                <span>Menu: </span>
-                                <input type="text"></input>
-                            </div>
-
                             <div class="name_food">
                                 <span>Food: </span>
-                                <input type="text"></input>
+                                <input type="text" name="name"></input>
+                            </div>
+
+                            <div class="name_menu">
+                              <span>Menu: </span>
+                                <select name="menu" id="">
+                                  <% for(let i=0; i<dataMenus.length; i++){ %>
+                                    <option value="<%=dataMenus[i].TD_MA%>">
+                                      <%=dataMenus[i].TD_TEN%>
+                                    </option>
+                                  <% } %>
+                                </select>
+                            </div>
+
+                            <div class="name_menu">
+                              <span>Menu: </span>
+                              <input type="text" name="name_menu"></input>
                             </div>
 
                             <div class="details">
                                 <span>Details: </span>
-                                <input type="text"></input>
+                                <input type="text" name="detail"></input>
                             </div>
                         </div>
 
                         <div class="bottom_right_food_details">
                             <span>Price: </span>
                             <div class="btn_bottom">
-                                <button>
-                                    <i class="fa-solid fa-minus"></i>
-                                </button>
-                                <span class="price">$ <input type="number" value="0.00"></input></span>
-                                <button>
-                                    <i class="fa-solid fa-plus"></i>
-                                </button>
+                                <span class="price">$ <input type="number" value="0.00" name="cost"></input></span>
                             </div>
+
                             <div class="bottom_btn">
                                 <div class="order_btn">
-                                    <input type="submit"></input>
+                                    <button>Submit</button>
                                 </div>
                             </div>
                         </div>
-                    </form>
+    
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
     </section>
 
     <footer>
