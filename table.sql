@@ -2871,3 +2871,11 @@ begin tran
 	end catch
 commit tran
 GO 
+
+select * from TAIKHOAN
+select * from KHACHHANG
+select * from DIACHI
+select * from MONAN
+select * from GIOHANG
+select * from DONHANG
+select * from CUAHANG

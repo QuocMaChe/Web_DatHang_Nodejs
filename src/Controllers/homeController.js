@@ -176,7 +176,7 @@ let getProfilepage = async (req, res) => {
             });
         }
         catch (err) {
-            console.log("ERROR:", err)
+            return res.redirect('/');
         }
         finally {
             pool.close();
@@ -422,6 +422,24 @@ let createNewUser = async (req, res) => {
     pool.close();
     }
 }
+//
+let processSearch = async (req, res) => {
+    try {
+        let search = req.body.search;
+        
+        await pool.connect();
+        let data_foods=[];
+        let foods=await pool.request().query(`exec sp_DanSachMonAnKhachHangTimKiem N'${search}'`);
+        
+        data_foods=foods.recordset;
+        
+        return res.render('search_page.ejs',{
+            dataFoods: data_foods
+        })
+    }catch(err) {
+        return res.redirect('/');
+    }
+}
 //Partner=========================================================================================================================================================================================
 let getHomepageDoitac = async (req, res) => {
     if (req.session.partner) {
@@ -521,7 +539,7 @@ let getProcessAddFoodDT = async (req, res) => {
                 let menu=await pool.request().query(`select * from THUCDON where CH_MA='${req.session.store[0].CH_MA}' and CN_MA='${req.params.id}' and TD_TEN='${name_menu}'`);
                 await pool.request().query(`exec sp_themMonAn '${req.session.partner[0].DT_MA}','${menu.recordset[0].TD_MA}' ,'${req.params.id}','${req.session.store[0].CH_MA}' ,'${food_name}' ,'${food_detail}' ,'${image_path}','${food_price}'`);
             }else{
-                await pool.request().query(`exec sp_themMonAn '${req.session.partner[0].DT_MA}','${id_menu}' ,'${req.params.id}','${req.session.store[0].CH_MA}' ,'${food_name}' ,'${food_detail}' ,'${image_path}','${food_price}'`);
+                await pool.request().query(`exec sp_themMonAn '${req.session.partner[0].DT_MA}','${id_menu}' ,'${req.params.id}','${req.session.store[0].CH_MA}' ,N'${food_name}' ,N'${food_detail}' ,'${image_path}','${food_price}'`);
             }
             
             return res.redirect(`/accb_food.vn/doitac/add_food/id/${req.params.id}`);
@@ -1100,5 +1118,6 @@ module.exports = {
     createrNewPartner,
     createrNewDriver,
     getEditProfilepageNhanvien,
-    getAcceptContractNhanvien
+    getAcceptContractNhanvien,
+    processSearch
 }

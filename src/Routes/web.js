@@ -49,6 +49,7 @@ const initWebRoute = (app) => {
     router.get('/accb_food.vn/addto_cart/id/:id', homeController.getAddtoCart);
     router.get('/accb_food.vn/cart/quantity/:operator/id/:id', homeController.updateQuantity);
     router.post('/sign_upUser', homeController.createNewUser)
+    router.post('/accb_food.vn/search', homeController.processSearch);
     //Route of Partner============================================================================================================================================================================
     router.get('/accb_food.vn/doitac', homeController.getHomepageDoitac);
     router.get('/accb_food.vn/doitac/sign_up', homeController.getSignUpDT);
